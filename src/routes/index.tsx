@@ -9,12 +9,6 @@ import { PageMeta } from "@/components/PageMeta";
 import { useCounter } from "@/hooks/useCounter";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Sahara - Protecting Widows' Rights with AI" },
-      { name: "description", content: "AI-powered inheritance fraud prevention for rural widows across South Asia." },
-    ],
-  }),
   component: Index,
 });
 
@@ -155,10 +149,7 @@ const TESTIMONIALS = [
 function Index() {
   return (
     <div>
-      <PageMeta
-        title="Sahara - Protecting Widows' Rights with AI"
-        desc="AI-powered inheritance fraud prevention for rural widows across South Asia."
-      />
+     
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-border/50 bg-background">
