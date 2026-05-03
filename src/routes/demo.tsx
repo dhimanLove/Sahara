@@ -2,19 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { 
-  Loader2, 
-  Send, 
-  Sparkles, 
-  Trash2, 
-  Shield, 
-  Scale, 
-  Languages, 
+import {
+  Loader2,
+  Send,
+  Sparkles,
+  Trash2,
+  Shield,
+  Scale,
+  Languages,
   MapPin,
   MessageSquare,
   FileText,
   Gavel,
-  Users
+  Users,
 } from "lucide-react";
 import { toast } from "sonner";
 import { PageMeta } from "@/components/PageMeta";
@@ -27,7 +27,10 @@ export const Route = createFileRoute("/demo")({
       { title: "Try Sahara AI - Free Legal Rights Assistant" },
       { name: "description", content: "Ask Sahara AI about your legal rights. Powered by Gemini." },
       { property: "og:title", content: "Try Sahara AI" },
-      { property: "og:description", content: "Ask about your inheritance and property rights - free." },
+      {
+        property: "og:description",
+        content: "Ask about your inheritance and property rights - free.",
+      },
     ],
   }),
   component: Demo,
@@ -60,7 +63,8 @@ const QUICK_ACTIONS = [
 
 // Use exactly as you specified
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+const GEMINI_API_URL =
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
 interface Message {
   role: "user" | "ai";
@@ -70,7 +74,7 @@ interface Message {
 }
 
 // Helper function for delay
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Call Gemini API with retry logic
 async function callGemini(prompt: string, retries: number = 3): Promise<string> {
@@ -124,7 +128,7 @@ function Demo() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [history, setHistory] = useState<Message[]>([]);
-  
+
   const heroRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const conversationRef = useRef<HTMLDivElement>(null);
@@ -144,11 +148,17 @@ function Demo() {
     const ctx = gsap.context(() => {
       gsap.from(heroRef.current, { opacity: 0, y: 30, duration: 0.8, ease: "power2.out" });
       gsap.from(formRef.current, {
-        opacity: 0, x: -20, duration: 0.6, delay: 0.2,
+        opacity: 0,
+        x: -20,
+        duration: 0.6,
+        delay: 0.2,
         scrollTrigger: { trigger: formRef.current, start: "top 85%" },
       });
       gsap.from(conversationRef.current, {
-        opacity: 0, x: 20, duration: 0.6, delay: 0.3,
+        opacity: 0,
+        x: 20,
+        duration: 0.6,
+        delay: 0.3,
         scrollTrigger: { trigger: conversationRef.current, start: "top 85%" },
       });
     });
@@ -176,7 +186,7 @@ Answer:`;
 
   const submit = async (e?: React.FormEvent) => {
     e?.preventDefault();
-    
+
     const query = situation === "Custom" ? customQ : situation;
     if (!query.trim()) {
       toast.error("Please describe your situation.");
@@ -192,7 +202,7 @@ Answer:`;
     setError(null);
 
     const userMessage: Message = { role: "user", text: query };
-    setHistory(prev => [...prev, userMessage]);
+    setHistory((prev) => [...prev, userMessage]);
 
     try {
       const aiResponse = await askGemini(query);
@@ -202,12 +212,13 @@ Answer:`;
         tokens: Math.ceil(aiResponse.length / 4),
         time: new Date().toLocaleTimeString(),
       };
-      setHistory(prev => [...prev, aiMessage]);
+      setHistory((prev) => [...prev, aiMessage]);
       toast.success("Response received");
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : "Service is busy. Please try again in a few moments.";
+      const errorMsg =
+        err instanceof Error ? err.message : "Service is busy. Please try again in a few moments.";
       setError(errorMsg);
-      setHistory(prev => prev.slice(0, -1));
+      setHistory((prev) => prev.slice(0, -1));
       toast.error(errorMsg);
     } finally {
       setLoading(false);
@@ -246,7 +257,7 @@ Answer:`;
               <div className="border-b border-border bg-muted/5 px-6 py-4">
                 <h2 className="text-sm font-medium text-foreground">Legal Query Parameters</h2>
               </div>
-              
+
               <div className="space-y-5 p-6">
                 <div>
                   <label className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
@@ -257,7 +268,9 @@ Answer:`;
                     onChange={(e) => setSituation(e.target.value)}
                     className="w-full rounded-sm border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
                   >
-                    {SITUATIONS.map(s => <option key={s}>{s}</option>)}
+                    {SITUATIONS.map((s) => (
+                      <option key={s}>{s}</option>
+                    ))}
                   </select>
                 </div>
 
@@ -270,7 +283,9 @@ Answer:`;
                     onChange={(e) => setJurisdiction(e.target.value)}
                     className="w-full rounded-sm border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
                   >
-                    {JURISDICTIONS.map(j => <option key={j}>{j}</option>)}
+                    {JURISDICTIONS.map((j) => (
+                      <option key={j}>{j}</option>
+                    ))}
                   </select>
                 </div>
 
@@ -283,7 +298,9 @@ Answer:`;
                     onChange={(e) => setLanguage(e.target.value)}
                     className="w-full rounded-sm border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
                   >
-                    {LANGUAGES.map(l => <option key={l}>{l}</option>)}
+                    {LANGUAGES.map((l) => (
+                      <option key={l}>{l}</option>
+                    ))}
                   </select>
                 </div>
 
@@ -307,7 +324,11 @@ Answer:`;
                   disabled={loading}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 disabled:opacity-50"
                 >
-                  {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                  {loading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Send className="h-4 w-4" />
+                  )}
                   {loading ? "Asking Sahara AI..." : "Ask Sahara AI →"}
                 </button>
 
@@ -342,15 +363,23 @@ Answer:`;
                       <MessageSquare className="h-8 w-8 text-muted-foreground/40" />
                     </div>
                     <p className="text-sm text-muted-foreground">Ask your first question →</p>
-                    <p className="mt-1 text-xs text-muted-foreground/60">Your conversation will appear here</p>
+                    <p className="mt-1 text-xs text-muted-foreground/60">
+                      Your conversation will appear here
+                    </p>
                   </div>
                 ) : (
                   history.map((m, i) => (
-                    <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} animate-in slide-in-from-bottom-2 fade-in duration-300`}>
-                      <div className={m.role === "user"
-                        ? "max-w-[85%] rounded-sm bg-primary/10 px-4 py-2.5 text-sm text-foreground"
-                        : "max-w-[85%] border-l-2 border-primary bg-muted/5 px-4 py-2.5 text-sm text-foreground"
-                      }>
+                    <div
+                      key={i}
+                      className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} animate-in slide-in-from-bottom-2 fade-in duration-300`}
+                    >
+                      <div
+                        className={
+                          m.role === "user"
+                            ? "max-w-[85%] rounded-sm bg-primary/10 px-4 py-2.5 text-sm text-foreground"
+                            : "max-w-[85%] border-l-2 border-primary bg-muted/5 px-4 py-2.5 text-sm text-foreground"
+                        }
+                      >
                         <p className="whitespace-pre-wrap leading-relaxed">{m.text}</p>
                         {m.role === "ai" && (
                           <div className="mt-2 flex gap-3 border-t border-border/50 pt-2 text-xs text-muted-foreground">
@@ -364,7 +393,9 @@ Answer:`;
               </div>
 
               <div className="border-t border-border bg-muted/5 p-4">
-                <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">Quick Actions</p>
+                <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Quick Actions
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {QUICK_ACTIONS.map((action) => (
                     <button
@@ -386,7 +417,8 @@ Answer:`;
                 <div className="flex items-start gap-2">
                   <Shield className="mt-0.5 h-3 w-3 shrink-0 text-destructive" />
                   <p className="text-xs leading-relaxed text-destructive">
-                    AI guidance only, not legal advice. Consult a qualified lawyer for binding legal decisions.
+                    AI guidance only, not legal advice. Consult a qualified lawyer for binding legal
+                    decisions.
                   </p>
                 </div>
               </div>
@@ -426,4 +458,4 @@ Answer:`;
       </div>
     </div>
   );
-} 
+}

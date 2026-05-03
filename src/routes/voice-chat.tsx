@@ -2,19 +2,19 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { 
-  Mic, 
-  MicOff, 
-  Send, 
-  Loader2, 
-  ArrowLeft, 
-  Trash2, 
-  Volume2, 
+import {
+  Mic,
+  MicOff,
+  Send,
+  Loader2,
+  ArrowLeft,
+  Trash2,
+  Volume2,
   VolumeX,
   Shield,
   Languages,
   MapPin,
-  MessageCircle
+  MessageCircle,
 } from "lucide-react";
 import { toast } from "sonner";
 import { PageMeta } from "@/components/PageMeta";
@@ -26,7 +26,10 @@ export const Route = createFileRoute("/voice-chat")({
   head: () => ({
     meta: [
       { title: "Voice Chat - Sahara AI" },
-      { name: "description", content: "Speak with Sahara AI in your language. Voice-first legal rights assistant." },
+      {
+        name: "description",
+        content: "Speak with Sahara AI in your language. Voice-first legal rights assistant.",
+      },
       { property: "og:title", content: "Voice Chat - Sahara AI" },
       { property: "og:description", content: "Speak with Sahara AI in your language." },
     ],
@@ -34,7 +37,13 @@ export const Route = createFileRoute("/voice-chat")({
   component: VoiceChat,
 });
 
-const JURISDICTIONS = ["India (Hindu law)", "India (Muslim law)", "Bangladesh", "Nepal", "Pakistan"];
+const JURISDICTIONS = [
+  "India (Hindu law)",
+  "India (Muslim law)",
+  "Bangladesh",
+  "Nepal",
+  "Pakistan",
+];
 const LANGUAGES = [
   { label: "English", code: "en-US" },
   { label: "Hindi", code: "hi-IN" },
@@ -101,7 +110,9 @@ function VoiceChat() {
     };
     recRef.current = rec;
     return () => {
-      try { rec.abort(); } catch {}
+      try {
+        rec.abort();
+      } catch {}
     };
   }, [language.code]);
 
@@ -197,14 +208,14 @@ function VoiceChat() {
       {/* Header */}
       <div ref={headerRef} className="border-b border-border bg-background">
         <div className="mx-auto flex max-w-4xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-          <Link 
-            to="/demo" 
+          <Link
+            to="/demo"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
-            <ArrowLeft className="h-4 w-4" /> 
+            <ArrowLeft className="h-4 w-4" />
             <span className="hidden sm:inline">Back</span>
           </Link>
-          
+
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1.5 rounded-sm border border-border bg-muted/5 px-2 py-1.5">
               <MapPin className="h-3 w-3 text-muted-foreground" />
@@ -214,23 +225,31 @@ function VoiceChat() {
                 aria-label="Jurisdiction"
                 className="bg-transparent text-xs font-medium outline-none sm:text-sm"
               >
-                {JURISDICTIONS.map((j) => <option key={j}>{j}</option>)}
+                {JURISDICTIONS.map((j) => (
+                  <option key={j}>{j}</option>
+                ))}
               </select>
             </div>
-            
+
             <div className="flex items-center gap-1.5 rounded-sm border border-border bg-muted/5 px-2 py-1.5">
               <Languages className="h-3 w-3 text-muted-foreground" />
               <select
                 value={language.code}
-                onChange={(e) => setLanguage(LANGUAGES.find((l) => l.code === e.target.value) || LANGUAGES[0])}
+                onChange={(e) =>
+                  setLanguage(LANGUAGES.find((l) => l.code === e.target.value) || LANGUAGES[0])
+                }
                 aria-label="Language"
                 className="bg-transparent text-xs font-medium outline-none sm:text-sm"
               >
-                {LANGUAGES.map((l) => <option key={l.code} value={l.code}>{l.label}</option>)}
+                {LANGUAGES.map((l) => (
+                  <option key={l.code} value={l.code}>
+                    {l.label}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-1">
             <button
               onClick={() => {
@@ -244,10 +263,13 @@ function VoiceChat() {
             >
               {speakReplies ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
             </button>
-            
+
             {history.length > 0 && (
               <button
-                onClick={() => { clearHistory(); lastSpoken.current = ""; }}
+                onClick={() => {
+                  clearHistory();
+                  lastSpoken.current = "";
+                }}
                 aria-label="Clear conversation"
                 className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive sm:h-9 sm:w-9"
               >
@@ -262,7 +284,10 @@ function VoiceChat() {
       <div ref={scrollRef} className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6">
           {history.length === 0 && (
-            <div ref={emptyStateRef} className="flex flex-col items-center justify-center py-12 text-center sm:py-20">
+            <div
+              ref={emptyStateRef}
+              className="flex flex-col items-center justify-center py-12 text-center sm:py-20"
+            >
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-primary/20 bg-primary/5 sm:h-20 sm:w-20">
                 <MessageCircle className="h-8 w-8 text-primary/60 sm:h-10 sm:w-10" />
               </div>
@@ -313,8 +338,14 @@ function VoiceChat() {
                 <div className="border-l-2 border-primary bg-muted/5 px-4 py-2.5">
                   <div className="flex items-center gap-1.5">
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary/60" />
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary/60" style={{ animationDelay: "0.2s" }} />
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary/60" style={{ animationDelay: "0.4s" }} />
+                    <span
+                      className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary/60"
+                      style={{ animationDelay: "0.2s" }}
+                    />
+                    <span
+                      className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary/60"
+                      style={{ animationDelay: "0.4s" }}
+                    />
                   </div>
                 </div>
               </div>
@@ -333,7 +364,7 @@ function VoiceChat() {
               </p>
             </div>
           )}
-          
+
           <div className="flex items-end gap-2">
             {/* Mic Button */}
             <button
@@ -349,7 +380,11 @@ function VoiceChat() {
               {listening && (
                 <span className="absolute inset-0 animate-ping rounded-sm bg-destructive opacity-30" />
               )}
-              {listening ? <MicOff className="relative h-4 w-4" /> : <Mic className="relative h-4 w-4" />}
+              {listening ? (
+                <MicOff className="relative h-4 w-4" />
+              ) : (
+                <Mic className="relative h-4 w-4" />
+              )}
             </button>
 
             {/* Text Input */}
@@ -369,10 +404,14 @@ function VoiceChat() {
               aria-label="Send message"
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm bg-primary text-primary-foreground transition-all hover:bg-primary/90 disabled:opacity-40 sm:h-12 sm:w-12"
             >
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+              {loading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Send className="h-4 w-4" />
+              )}
             </button>
           </div>
-          
+
           {/* Disclaimer */}
           <div className="mt-3 flex items-center justify-center gap-2 border-t border-border/50 pt-3">
             <Shield className="h-3 w-3 text-muted-foreground/60" />

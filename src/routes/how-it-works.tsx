@@ -2,13 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { 
-  Shield, 
-  Users, 
-  Mic, 
-  CheckCircle, 
-  Scale, 
-  Bell, 
+import {
+  Shield,
+  Users,
+  Mic,
+  CheckCircle,
+  Scale,
+  Bell,
   MapPin,
   FileText,
   Bot,
@@ -17,7 +17,7 @@ import {
   Database,
   Cloud,
   Smartphone,
-  Languages
+  Languages,
 } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 
@@ -27,7 +27,10 @@ export const Route = createFileRoute("/how-it-works")({
   head: () => ({
     meta: [
       { title: "How Sahara Works - Three phases of protection" },
-      { name: "description", content: "Three phases: proactive registration, immediate protection, active defence." },
+      {
+        name: "description",
+        content: "Three phases: proactive registration, immediate protection, active defence.",
+      },
       { property: "og:title", content: "How Sahara Works" },
       { property: "og:description", content: "Three phases of protection." },
     ],
@@ -42,8 +45,16 @@ const PHASES = [
     title: "Proactive Protection",
     icon: Shield,
     steps: [
-      { icon: FileText, title: "Register Documents", desc: "SHA-256 sealed land deeds, Aadhaar, marriage certificates" },
-      { icon: Users, title: "Trusted Contacts", desc: "Daughter, NGO, ASHA worker - auto-notified in emergency" },
+      {
+        icon: FileText,
+        title: "Register Documents",
+        desc: "SHA-256 sealed land deeds, Aadhaar, marriage certificates",
+      },
+      {
+        icon: Users,
+        title: "Trusted Contacts",
+        desc: "Daughter, NGO, ASHA worker - auto-notified in emergency",
+      },
       { icon: Mic, title: "Voice Will", desc: "State wishes by voice. Encrypted. Timestamped." },
     ],
   },
@@ -53,10 +64,26 @@ const PHASES = [
     title: "Immediate Protection",
     icon: Bell,
     steps: [
-      { icon: CheckCircle, title: "Register Bereavement", desc: "One-tap - locks vault, notifies network" },
-      { icon: Scale, title: "Rights Explained", desc: "Gemini reads your laws aloud, in your language" },
-      { icon: Bell, title: "Contacts Alerted", desc: "Trusted circle gets your location and status" },
-      { icon: MapPin, title: "Help on Maps", desc: "Nearest free legal aid centres on Google Maps" },
+      {
+        icon: CheckCircle,
+        title: "Register Bereavement",
+        desc: "One-tap - locks vault, notifies network",
+      },
+      {
+        icon: Scale,
+        title: "Rights Explained",
+        desc: "Gemini reads your laws aloud, in your language",
+      },
+      {
+        icon: Bell,
+        title: "Contacts Alerted",
+        desc: "Trusted circle gets your location and status",
+      },
+      {
+        icon: MapPin,
+        title: "Help on Maps",
+        desc: "Nearest free legal aid centres on Google Maps",
+      },
     ],
   },
   {
@@ -75,12 +102,42 @@ const PHASES = [
 
 const TECH_STACK = [
   { name: "Flutter", category: "Frontend", purpose: "Cross-platform mobile app", color: "#02569B" },
-  { name: "Firebase", category: "Backend", purpose: "Authentication, database, storage", color: "#FFA000" },
-  { name: "Gemini AI", category: "AI/ML", purpose: "Legal analysis & classification", color: "#4285F4" },
-  { name: "Google Maps", category: "Location", purpose: "Legal aid centre locator", color: "#34A853" },
-  { name: "TensorFlow Lite", category: "AI/ML", purpose: "On-device ML for low connectivity", color: "#FF6F00" },
-  { name: "Google Translate", category: "NLP", purpose: "Multi-language support", color: "#EA4335" },
-  { name: "Speech Recognition", category: "Voice", purpose: "Voice-first interface", color: "#7C3AED" },
+  {
+    name: "Firebase",
+    category: "Backend",
+    purpose: "Authentication, database, storage",
+    color: "#FFA000",
+  },
+  {
+    name: "Gemini AI",
+    category: "AI/ML",
+    purpose: "Legal analysis & classification",
+    color: "#4285F4",
+  },
+  {
+    name: "Google Maps",
+    category: "Location",
+    purpose: "Legal aid centre locator",
+    color: "#34A853",
+  },
+  {
+    name: "TensorFlow Lite",
+    category: "AI/ML",
+    purpose: "On-device ML for low connectivity",
+    color: "#FF6F00",
+  },
+  {
+    name: "Google Translate",
+    category: "NLP",
+    purpose: "Multi-language support",
+    color: "#EA4335",
+  },
+  {
+    name: "Speech Recognition",
+    category: "Voice",
+    purpose: "Voice-first interface",
+    color: "#7C3AED",
+  },
   { name: "AES-256", category: "Security", purpose: "End-to-end encryption", color: "#059669" },
 ];
 
@@ -174,7 +231,9 @@ function HowItWorks() {
           {PHASES.map((phase, idx) => (
             <div
               key={phase.n}
-              ref={(el) => { phasesRef.current[idx] = el; }}
+              ref={(el) => {
+                phasesRef.current[idx] = el;
+              }}
               className="relative"
             >
               {/* Phase Header */}
@@ -228,11 +287,14 @@ function HowItWorks() {
               Built with modern, accessible technology
             </p>
           </div>
-          
+
           <div ref={techRef} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {TECH_STACK.map((tech) => (
-              <div key={tech.name} className="flex items-center gap-3 border border-border bg-background p-3">
-                <div 
+              <div
+                key={tech.name}
+                className="flex items-center gap-3 border border-border bg-background p-3"
+              >
+                <div
                   className="h-8 w-8 shrink-0 rounded-sm"
                   style={{ backgroundColor: tech.color }}
                 />
@@ -252,11 +314,9 @@ function HowItWorks() {
           <h2 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
             Designed for Everyone
           </h2>
-          <p className="mt-2 text-sm text-foreground/70">
-            Accessible on any device, anywhere
-          </p>
+          <p className="mt-2 text-sm text-foreground/70">Accessible on any device, anywhere</p>
         </div>
-        
+
         <div ref={accessibilityRef} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {ACCESSIBILITY_FEATURES.map((feature) => (
             <div key={feature.label} className="border border-border bg-background p-5 text-center">
@@ -268,7 +328,7 @@ function HowItWorks() {
             </div>
           ))}
         </div>
-        
+
         {/* Final Badge */}
         <div className="mt-12 text-center">
           <div className="inline-flex items-center gap-2 rounded-sm border border-primary/20 bg-primary/5 px-4 py-2">

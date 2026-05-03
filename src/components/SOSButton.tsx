@@ -3,7 +3,11 @@ import { Phone, X, AlertTriangle, PhoneCall, MessageCircle, MapPin } from "lucid
 import { useState } from "react";
 
 const EMERGENCY_CONTACTS = [
-  { name: "National Women's Helpline", number: "1091", description: "24/7 support for women in distress" },
+  {
+    name: "National Women's Helpline",
+    number: "1091",
+    description: "24/7 support for women in distress",
+  },
   { name: "Police Emergency", number: "100", description: "Immediate police assistance" },
   { name: "Legal Aid Helpline", number: "15100", description: "Free legal advice" },
   { name: "Medical Emergency", number: "108", description: "Ambulance services" },
@@ -41,11 +45,8 @@ export function SOSButton() {
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={handleClose}
-          />
-          
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={handleClose} />
+
           {/* Modal Content */}
           <div className="relative w-full max-w-md rounded-lg border border-red-500/30 bg-background shadow-2xl animate-in fade-in zoom-in duration-200">
             {/* Header */}
@@ -93,7 +94,8 @@ export function SOSButton() {
                 <div className="flex items-start gap-2">
                   <MessageCircle className="mt-0.5 h-4 w-4 text-yellow-600" />
                   <p className="text-xs text-yellow-800 dark:text-yellow-400">
-                    If you can't speak, tap the button again and we'll send your location to emergency services.
+                    If you can't speak, tap the button again and we'll send your location to
+                    emergency services.
                   </p>
                 </div>
               </div>

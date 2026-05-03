@@ -11,7 +11,10 @@ export const Route = createFileRoute("/features")({
   head: () => ({
     meta: [
       { title: "Features - Sahara" },
-      { name: "description", content: "Document vault, AI rights assistant, legal letter generator." },
+      {
+        name: "description",
+        content: "Document vault, AI rights assistant, legal letter generator.",
+      },
       { property: "og:title", content: "Features - Sahara" },
       { property: "og:description", content: "Powerful protection. Simple to use." },
     ],
@@ -26,7 +29,7 @@ function VaultMock() {
     { name: "Aadhaar.pdf", date: "01 Jan 2024", status: "verified" },
     { name: "Marriage Cert.pdf", date: "05 Jun 2010", status: "verified" },
   ];
-  
+
   return (
     <div className="border border-border bg-background">
       <div className="border-b border-border bg-muted/5 px-5 py-3">
@@ -37,7 +40,10 @@ function VaultMock() {
       </div>
       <div className="divide-y divide-border">
         {docs.map((d) => (
-          <div key={d.name} className="flex items-center gap-3 px-5 py-3 transition-colors hover:bg-muted/10">
+          <div
+            key={d.name}
+            className="flex items-center gap-3 px-5 py-3 transition-colors hover:bg-muted/10"
+          >
             <div className="flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-muted/20">
               <FileCheck className="h-4 w-4 text-primary" />
             </div>
@@ -76,10 +82,10 @@ function ChatMock() {
       </div>
       <div className="border-t border-border p-3">
         <div className="flex items-center gap-2">
-          <input 
-            className="flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground" 
-            placeholder="Ask anything..." 
-            disabled 
+          <input
+            className="flex-1 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-muted-foreground"
+            placeholder="Ask anything..."
+            disabled
           />
           <button className="flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-muted/20 transition-colors hover:bg-muted/30">
             <Mic className="h-4 w-4 text-foreground" />
@@ -98,11 +104,16 @@ function LetterMock() {
       </div>
       <div className="p-5">
         <div className="space-y-2 rounded-sm border border-border bg-muted/10 p-4">
-          <p className="text-xs font-medium text-muted-foreground">TO: The Tehsildar, District Patna</p>
-          <p className="text-xs font-medium text-muted-foreground">SUBJECT: Complaint regarding forgery of land deed</p>
+          <p className="text-xs font-medium text-muted-foreground">
+            TO: The Tehsildar, District Patna
+          </p>
+          <p className="text-xs font-medium text-muted-foreground">
+            SUBJECT: Complaint regarding forgery of land deed
+          </p>
           <div className="h-px bg-border my-2" />
           <p className="text-sm leading-relaxed text-foreground/75">
-            Respected Sir, I am writing to formally report the attempted forgery of my late husband's land records by relatives...
+            Respected Sir, I am writing to formally report the attempted forgery of my late
+            husband's land records by relatives...
           </p>
         </div>
         <div className="mt-4 flex gap-2">
@@ -121,13 +132,21 @@ function LetterMock() {
 // Core Values Section
 function CoreValues() {
   const values = [
-    { icon: Shield, title: "Security First", desc: "Bank-grade encryption with on-device verification" },
-    { icon: Zap, title: "Instant Access", desc: "Legal protection available 24/7, no waiting periods" },
+    {
+      icon: Shield,
+      title: "Security First",
+      desc: "Bank-grade encryption with on-device verification",
+    },
+    {
+      icon: Zap,
+      title: "Instant Access",
+      desc: "Legal protection available 24/7, no waiting periods",
+    },
     { icon: Globe, title: "Multi-Language", desc: "Support for 12+ Indian languages & dialects" },
   ];
-  
+
   const sectionRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     gsap.from(sectionRef.current?.children || [], {
       opacity: 0,
@@ -140,7 +159,7 @@ function CoreValues() {
       },
     });
   }, []);
-  
+
   return (
     <div ref={sectionRef} className="grid gap-6 sm:grid-cols-3">
       {values.map((value, idx) => (
@@ -172,7 +191,7 @@ function FeatureBlock({
   mock: React.ReactNode;
 }) {
   const sectionRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(sectionRef.current, {
@@ -186,18 +205,23 @@ function FeatureBlock({
         },
       });
     }, sectionRef);
-    
+
     return () => ctx.revert();
   }, []);
-  
+
   return (
-    <div ref={sectionRef} className={`grid gap-10 lg:grid-cols-2 lg:gap-16 ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
+    <div
+      ref={sectionRef}
+      className={`grid gap-10 lg:grid-cols-2 lg:gap-16 ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
+    >
       <div className="space-y-4">
         <div className="flex h-12 w-12 items-center justify-center border border-primary/20 bg-primary/5">
           <Icon className="h-5 w-5 text-primary" />
         </div>
         <div>
-          <h2 className="text-2xl font-light tracking-tight text-foreground sm:text-3xl">{title}</h2>
+          <h2 className="text-2xl font-light tracking-tight text-foreground sm:text-3xl">
+            {title}
+          </h2>
           {subtitle && <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>}
         </div>
         <ul className="space-y-3 pt-2">
@@ -217,7 +241,7 @@ function FeatureBlock({
 function Features() {
   const heroRef = useRef<HTMLDivElement>(null);
   const techRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero animation
@@ -227,7 +251,7 @@ function Features() {
         duration: 0.8,
         ease: "power2.out",
       });
-      
+
       // Tech stack animation
       gsap.from(techRef.current?.children || [], {
         opacity: 0,
@@ -240,10 +264,10 @@ function Features() {
         },
       });
     });
-    
+
     return () => ctx.revert();
   }, []);
-  
+
   const techStack = [
     { name: "Firebase", color: "#FFA000", text: "#000" },
     { name: "Gemini AI", color: "#4285F4", text: "#fff" },
@@ -252,11 +276,14 @@ function Features() {
     { name: "Google Translate", color: "#EA4335", text: "#fff" },
     { name: "TF Lite", color: "#FF6F00", text: "#fff" },
   ];
-  
+
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="Features - Sahara" desc="Document vault, AI rights assistant, legal letter generator." />
-      
+      <PageMeta
+        title="Features - Sahara"
+        desc="Document vault, AI rights assistant, legal letter generator."
+      />
+
       {/* Hero Section */}
       <div ref={heroRef} className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-16 text-center sm:px-8 lg:py-20">
@@ -268,7 +295,7 @@ function Features() {
           </p>
         </div>
       </div>
-      
+
       {/* Features */}
       <div className="mx-auto max-w-6xl space-y-20 px-6 py-16 sm:px-8 lg:space-y-28 lg:py-24">
         <FeatureBlock
@@ -282,7 +309,7 @@ function Features() {
           ]}
           mock={<VaultMock />}
         />
-        
+
         <FeatureBlock
           reverse
           icon={MessageCircle}
@@ -295,7 +322,7 @@ function Features() {
           ]}
           mock={<ChatMock />}
         />
-        
+
         <FeatureBlock
           icon={Send}
           title="Legal Letters"
@@ -308,7 +335,7 @@ function Features() {
           mock={<LetterMock />}
         />
       </div>
-      
+
       {/* Core Values */}
       <div className="border-y border-border bg-muted/5 py-16">
         <div className="mx-auto max-w-6xl px-6 sm:px-8">
@@ -318,7 +345,7 @@ function Features() {
           <CoreValues />
         </div>
       </div>
-      
+
       {/* Technology Stack */}
       <div className="mx-auto max-w-6xl px-6 py-16 sm:px-8 lg:py-20">
         <div className="text-center">
