@@ -28,10 +28,14 @@ export const Route = createFileRoute("/voice-chat")({
       { title: "Voice Chat - Sahara AI" },
       {
         name: "description",
-        content: "Speak with Sahara AI in your language. Voice-first legal rights assistant.",
+        content:
+          "Speak with Sahara AI in your language. Voice-first legal rights assistant.",
       },
       { property: "og:title", content: "Voice Chat - Sahara AI" },
-      { property: "og:description", content: "Speak with Sahara AI in your language." },
+      {
+        property: "og:description",
+        content: "Speak with Sahara AI in your language.",
+      },
     ],
   }),
   component: VoiceChat,
@@ -54,7 +58,9 @@ const LANGUAGES = [
 type SR = any;
 function getRecognition(): SR | null {
   if (typeof window === "undefined") return null;
-  const Ctor = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+  const Ctor =
+    (window as any).SpeechRecognition ||
+    (window as any).webkitSpeechRecognition;
   return Ctor ? new Ctor() : null;
 }
 
@@ -119,7 +125,10 @@ function VoiceChat() {
   // Auto-scroll
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: "smooth",
+      });
     }
   }, [history, interim, loading]);
 
@@ -130,7 +139,12 @@ function VoiceChat() {
 
   // Speak latest AI reply
   useEffect(() => {
-    if (!speakReplies || typeof window === "undefined" || !window.speechSynthesis) return;
+    if (
+      !speakReplies ||
+      typeof window === "undefined" ||
+      !window.speechSynthesis
+    )
+      return;
     const last = history[history.length - 1];
     if (!last || last.role !== "ai") return;
     if (lastSpoken.current === last.text) return;
@@ -203,7 +217,10 @@ function VoiceChat() {
 
   return (
     <div className="fixed inset-0 top-[57px] z-30 flex flex-col bg-background">
-      <PageMeta title="Voice Chat - Sahara AI" desc="Speak with Sahara AI in your language." />
+      <PageMeta
+        title="Voice Chat - Sahara AI"
+        desc="Speak with Sahara AI in your language."
+      />
 
       {/* Header */}
       <div ref={headerRef} className="border-b border-border bg-background">
@@ -236,7 +253,10 @@ function VoiceChat() {
               <select
                 value={language.code}
                 onChange={(e) =>
-                  setLanguage(LANGUAGES.find((l) => l.code === e.target.value) || LANGUAGES[0])
+                  setLanguage(
+                    LANGUAGES.find((l) => l.code === e.target.value) ||
+                      LANGUAGES[0],
+                  )
                 }
                 aria-label="Language"
                 className="bg-transparent text-xs font-medium outline-none sm:text-sm"
@@ -254,14 +274,19 @@ function VoiceChat() {
             <button
               onClick={() => {
                 setSpeakReplies((v) => {
-                  if (v && window.speechSynthesis) window.speechSynthesis.cancel();
+                  if (v && window.speechSynthesis)
+                    window.speechSynthesis.cancel();
                   return !v;
                 });
               }}
               aria-label={speakReplies ? "Mute replies" : "Unmute replies"}
               className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-muted/10 hover:text-primary sm:h-9 sm:w-9"
             >
-              {speakReplies ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+              {speakReplies ? (
+                <Volume2 className="h-4 w-4" />
+              ) : (
+                <VolumeX className="h-4 w-4" />
+              )}
             </button>
 
             {history.length > 0 && (
@@ -295,12 +320,14 @@ function VoiceChat() {
                 Voice Chat with Sahara AI
               </h1>
               <p className="mt-2 max-w-md text-sm text-muted-foreground">
-                Tap the mic and ask anything about your rights - in {language.label}. Or type below.
+                Tap the mic and ask anything about your rights - in{" "}
+                {language.label}. Or type below.
               </p>
               {!supported && (
                 <div className="mt-6 flex items-center gap-2 rounded-sm border border-destructive/20 bg-destructive/5 px-3 py-2 text-xs text-destructive">
                   <Shield className="h-3 w-3" />
-                  Voice input not supported in this browser. Please type instead.
+                  Voice input not supported in this browser. Please type
+                  instead.
                 </div>
               )}
             </div>
@@ -321,7 +348,9 @@ function VoiceChat() {
                       : "max-w-[85%] border-l-2 border-primary bg-muted/5 px-4 py-2.5 text-sm text-foreground"
                   }
                 >
-                  <p className="whitespace-pre-wrap leading-relaxed">{m.text}</p>
+                  <p className="whitespace-pre-wrap leading-relaxed">
+                    {m.text}
+                  </p>
                   {m.role === "ai" && (
                     <div className="mt-2 flex gap-3 border-t border-border/50 pt-2 text-xs text-muted-foreground">
                       <span>Tokens: ~{m.tokens}</span>
@@ -393,7 +422,9 @@ function VoiceChat() {
               onChange={(e) => setText(e.target.value)}
               onKeyDown={onKey}
               rows={1}
-              placeholder={listening ? "Listening..." : "Ask about your rights..."}
+              placeholder={
+                listening ? "Listening..." : "Ask about your rights..."
+              }
               className="max-h-32 min-h-[44px] flex-1 resize-none rounded-sm border border-border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-primary/50 focus:ring-0 sm:px-4"
             />
 

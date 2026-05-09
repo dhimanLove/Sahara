@@ -172,7 +172,7 @@ function Index() {
               className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-muted/40 px-3.5 py-1.5 text-[11.5px] font-medium tracking-wide text-muted-foreground"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Google Solution Challenge 2026
+              Developed for Widows
             </motion.div>
 
             <motion.div

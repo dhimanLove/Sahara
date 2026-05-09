@@ -54,7 +54,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border px-4 py-5 text-center text-xs text-muted-foreground sm:px-6">
-        Built with Gemini AI · Firebase · Flutter · Google Maps · Google Solution Challenge 2026 · © 2026 Sahara
+        Built with Gemini AI · Firebase · Flutter · Google Maps · Developed for Widows · © 2026 Sahara
       </div>
     </footer>
   );
