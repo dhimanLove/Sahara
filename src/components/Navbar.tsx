@@ -188,19 +188,18 @@ export function Navbar() {
         <Link
           to="/"
           aria-label="Sahara home"
-          className="flex max-w-[120px] items-center gap-2.5 outline-none sm:max-w-none"
+          className="flex items-center gap-3 outline-none"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary/10">
-            <Shield className="h-4 w-4 text-primary" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-border/60 bg-muted/30">
+            <img
+              src="asset\sahra_logo.png"
+              alt="Sahara logo"
+              className="h-6 w-6 object-contain"
+            />
           </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-[15px] font-semibold tracking-tight text-foreground">
-              Sahara
-            </span>
-            <span className="text-[9px] font-medium uppercase tracking-[0.15em] text-muted-foreground/50">
-              Legal Access
-            </span>
-          </div>
+          <span className="text-[16px] font-semibold tracking-tight text-foreground">
+            Sahara
+          </span>
         </Link>
 
         {/* Desktop Links */}
@@ -296,10 +295,10 @@ export function Navbar() {
 
           {/* Mobile menu button */}
           <button
+            type="button"
             className="relative ml-1 flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
-            aria-expanded={open}
           >
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
