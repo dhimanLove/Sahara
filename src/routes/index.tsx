@@ -78,7 +78,7 @@ function Typewriter() {
 }
 function PhoneMockup() {
   return (
-    <div className="mx-auto w-[240px] lg:w-[280px]">
+    <div className="mx-auto w-[340px] lg:w-[300px]">
       <img
         src={saharaPng}
         alt="Sahara phone mockup"
