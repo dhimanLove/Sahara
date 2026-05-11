@@ -1,15 +1,30 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Moon, Sun, X, Download, Shield, Zap, Smartphone, User } from "lucide-react";
+import {
+  Menu,
+  Moon,
+  Sun,
+  X,
+  Download,
+  Shield,
+  Zap,
+  Smartphone,
+  User,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDarkMode } from "@/hooks/useDarkMode";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-  DropdownMenuLabel
+  DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 
 const links = [
@@ -22,7 +37,15 @@ const links = [
   { to: "/impact", label: "Impact" },
 ];
 
-function NavLink({ to, label, exact }: { to: string; label: string; exact?: boolean }) {
+function NavLink({
+  to,
+  label,
+  exact,
+}: {
+  to: string;
+  label: string;
+  exact?: boolean;
+}) {
   return (
     <li className="list-none">
       <Link
@@ -59,7 +82,7 @@ function DownloadTooltip() {
     >
       {/* Arrow */}
       <div className="absolute -top-[5px] right-4 h-2.5 w-2.5 rotate-45 border-l border-t border-border bg-background" />
-      
+
       <div className="p-4">
         <div className="mb-3 flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
@@ -67,15 +90,21 @@ function DownloadTooltip() {
           </div>
           <div>
             <p className="text-sm font-medium text-foreground">Mobile App</p>
-            <p className="text-xs text-muted-foreground">Coming to Android & iOS</p>
+            <p className="text-xs text-muted-foreground">
+              Coming to Android & iOS
+            </p>
           </div>
         </div>
-        
+
         {/* Progress bar */}
         <div className="mb-3">
           <div className="mb-1.5 flex items-center justify-between">
-            <span className="text-[11px] font-medium text-muted-foreground">Launch Progress</span>
-            <span className="text-[11px] font-semibold text-foreground">68%</span>
+            <span className="text-[11px] font-medium text-muted-foreground">
+              Launch Progress
+            </span>
+            <span className="text-[11px] font-semibold text-foreground">
+              68%
+            </span>
           </div>
           <div className="h-1 w-full overflow-hidden rounded-full bg-muted">
             <motion.div
@@ -86,27 +115,35 @@ function DownloadTooltip() {
             />
           </div>
         </div>
-        
+
         {/* Status list */}
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            <span className="text-xs text-foreground/70">Web Platform - Live</span>
+            <span className="text-xs text-foreground/70">
+              Web Platform - Live
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            <span className="text-xs text-foreground/70">Backend API - Live</span>
+            <span className="text-xs text-foreground/70">
+              Backend API - Live
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-            <span className="text-xs text-foreground/70">Android App - Q3 2026</span>
+            <span className="text-xs text-foreground/70">
+              Android App - Q3 2026
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground/30" />
-            <span className="text-xs text-muted-foreground/60">iOS App - TBD</span>
+            <span className="text-xs text-muted-foreground/60">
+              iOS App - TBD
+            </span>
           </div>
         </div>
-        
+
         {/* Notice */}
         <div className="mt-3 rounded-md bg-muted/30 px-2 py-1.5">
           <p className="text-center text-[10px] text-muted-foreground">
@@ -133,7 +170,9 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   return (
@@ -146,12 +185,18 @@ export function Navbar() {
 
       <nav className="relative mx-auto flex h-14 max-h-[64px] max-w-7xl items-center justify-between px-6 sm:h-16 sm:px-8">
         {/* Logo */}
-        <Link to="/" aria-label="Sahara home" className="flex max-w-[120px] items-center gap-2.5 outline-none sm:max-w-none">
+        <Link
+          to="/"
+          aria-label="Sahara home"
+          className="flex max-w-[120px] items-center gap-2.5 outline-none sm:max-w-none"
+        >
           <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary/10">
             <Shield className="h-4 w-4 text-primary" />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-[15px] font-semibold tracking-tight text-foreground">Sahara</span>
+            <span className="text-[15px] font-semibold tracking-tight text-foreground">
+              Sahara
+            </span>
             <span className="text-[9px] font-medium uppercase tracking-[0.15em] text-muted-foreground/50">
               Legal Access
             </span>
@@ -161,7 +206,12 @@ export function Navbar() {
         {/* Desktop Links */}
         <ul className="hidden items-center gap-5 lg:flex">
           {links.map((l) => (
-            <NavLink key={l.to} to={l.to} label={l.label} exact={l.to === "/"} />
+            <NavLink
+              key={l.to}
+              to={l.to}
+              label={l.label}
+              exact={l.to === "/"}
+            />
           ))}
         </ul>
 
@@ -182,12 +232,17 @@ export function Navbar() {
                 transition={{ duration: 0.15 }}
                 className="absolute"
               >
-                {dark ? <Sun className="h-[15px] w-[15px]" /> : <Moon className="h-[15px] w-[15px]" />}
+                {dark ? (
+                  <Sun className="h-[15px] w-[15px]" />
+                ) : (
+                  <Moon className="h-[15px] w-[15px]" />
+                )}
               </motion.span>
             </AnimatePresence>
           </button>
 
-          {/* Auth Dropdown */}
+          {/* Auth Dropdown — Commented out */}
+          {/* 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
@@ -212,6 +267,7 @@ export function Navbar() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          */}
 
           <span className="mx-0.5 hidden h-4 w-px bg-border sm:block" />
 
@@ -254,7 +310,11 @@ export function Navbar() {
                 transition={{ duration: 0.15 }}
                 className="absolute"
               >
-                {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+                {open ? (
+                  <X className="h-4 w-4" />
+                ) : (
+                  <Menu className="h-4 w-4" />
+                )}
               </motion.span>
             </AnimatePresence>
           </button>
@@ -286,7 +346,8 @@ export function Navbar() {
                       className="flex items-center justify-between rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
                       activeOptions={{ exact: l.to === "/" }}
                       activeProps={{
-                        className: "flex items-center justify-between rounded-md px-3 py-2.5 text-sm font-medium bg-muted/30 text-foreground",
+                        className:
+                          "flex items-center justify-between rounded-md px-3 py-2.5 text-sm font-medium bg-muted/30 text-foreground",
                       }}
                     >
                       {l.label}
@@ -302,17 +363,23 @@ export function Navbar() {
                     <Download className="h-4 w-4 text-muted-foreground" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-foreground/70">Mobile App</p>
+                    <p className="text-sm font-medium text-foreground/70">
+                      Mobile App
+                    </p>
                     <div className="mt-1 flex items-center gap-2">
                       <span className="relative flex h-1.5 w-1.5">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
                         <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
                       </span>
-                      <span className="text-xs text-primary/80">Coming Q3 2026</span>
+                      <span className="text-xs text-primary/80">
+                        Coming Q3 2026
+                      </span>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xs font-medium text-muted-foreground">68%</p>
+                    <p className="text-2xs font-medium text-muted-foreground">
+                      68%
+                    </p>
                     <p className="text-2xs text-muted-foreground/60">ready</p>
                   </div>
                 </div>
@@ -323,4 +390,4 @@ export function Navbar() {
       </AnimatePresence>
     </header>
   );
-} 
+}

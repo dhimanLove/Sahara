@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -122,7 +123,6 @@ function VoiceChat() {
     };
   }, [language.code]);
 
-  // Auto-scroll
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({
@@ -132,7 +132,6 @@ function VoiceChat() {
     }
   }, [history, interim, loading]);
 
-  // Toast errors
   useEffect(() => {
     if (error) toast.error(error);
   }, [error]);
