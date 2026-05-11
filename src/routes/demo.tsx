@@ -25,7 +25,10 @@ export const Route = createFileRoute("/demo")({
   head: () => ({
     meta: [
       { title: "Try Sahara AI - Free Legal Rights Assistant" },
-      { name: "description", content: "Ask Sahara AI about your legal rights. Powered by Gemini." },
+      {
+        name: "description",
+        content: "Ask Sahara AI about your legal rights. Powered by Gemini.",
+      },
       { property: "og:title", content: "Try Sahara AI" },
       {
         property: "og:description",
@@ -56,9 +59,17 @@ const JURISDICTIONS = [
 const LANGUAGES = ["English", "Hindi", "Bengali", "Nepali"];
 
 const QUICK_ACTIONS = [
-  { label: "Know your full rights", icon: Scale, action: "Know your full rights" },
+  {
+    label: "Know your full rights",
+    icon: Scale,
+    action: "Know your full rights",
+  },
   { label: "Find free legal aid", icon: Users, action: "Find free legal aid" },
-  { label: "Generate legal letter", icon: FileText, action: "Generate legal letter" },
+  {
+    label: "Generate legal letter",
+    icon: FileText,
+    action: "Generate legal letter",
+  },
 ];
 
 // Use exactly as you specified
@@ -77,7 +88,10 @@ interface Message {
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Call Gemini API with retry logic
-async function callGemini(prompt: string, retries: number = 3): Promise<string> {
+async function callGemini(
+  prompt: string,
+  retries: number = 3,
+): Promise<string> {
   for (let attempt = 1; attempt <= retries; attempt++) {
     try {
       const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
@@ -104,14 +118,18 @@ async function callGemini(prompt: string, retries: number = 3): Promise<string> 
       // Handle rate limits / overload with backoff
       if (response.status === 429 || response.status === 503) {
         const delay = Math.pow(2, attempt) * 1000; // 2,4,8 seconds
-        console.warn(`API busy (${response.status}), retry ${attempt}/${retries} in ${delay}ms`);
+        console.warn(
+          `API busy (${response.status}), retry ${attempt}/${retries} in ${delay}ms`,
+        );
         await sleep(delay);
         continue;
       }
 
       // Other errors
       const errorText = await response.text();
-      throw new Error(`API Error (${response.status}): ${errorText.slice(0, 100)}`);
+      throw new Error(
+        `API Error (${response.status}): ${errorText.slice(0, 100)}`,
+      );
     } catch (err) {
       if (attempt === retries) throw err;
       await sleep(1000 * attempt);
@@ -140,13 +158,19 @@ function Demo() {
 
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [history]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(heroRef.current, { opacity: 0, y: 30, duration: 0.8, ease: "power2.out" });
+      gsap.from(heroRef.current, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out",
+      });
       gsap.from(formRef.current, {
         opacity: 0,
         x: -20,
@@ -194,7 +218,9 @@ Answer:`;
     }
 
     if (!GEMINI_API_KEY) {
-      toast.error("Gemini API key not configured. Please add VITE_GEMINI_API_KEY to .env");
+      toast.error(
+        "Gemini API key not configured. Please add VITE_GEMINI_API_KEY to .env",
+      );
       return;
     }
 
@@ -216,7 +242,9 @@ Answer:`;
       toast.success("Response received");
     } catch (err) {
       const errorMsg =
-        err instanceof Error ? err.message : "Service is busy. Please try again in a few moments.";
+        err instanceof Error
+          ? err.message
+          : "Service is busy. Please try again in a few moments.";
       setError(errorMsg);
       setHistory((prev) => prev.slice(0, -1));
       toast.error(errorMsg);
@@ -232,13 +260,18 @@ Answer:`;
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="Try Sahara AI" desc="Ask Sahara AI about your legal rights." />
+      <PageMeta
+        title="Try Sahara AI"
+        desc="Ask Sahara AI about your legal rights."
+      />
 
       <div ref={heroRef} className="border-b border-border">
         <div className="mx-auto max-w-6xl px-6 py-12 text-center sm:px-8 lg:py-16">
           <div className="inline-flex items-center gap-2 rounded-sm border border-primary/20 bg-primary/5 px-3 py-1">
             <Sparkles className="h-3 w-3 text-primary" />
-            <span className="text-xs font-medium text-primary">Powered by Gemini 2.5 Flash</span>
+            <span className="text-xs font-medium text-primary">
+              Powered by Gemini 2.5 Flash
+            </span>
           </div>
           <h1 className="mt-4 text-3xl font-light tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             Talk to Sahara AI
@@ -253,9 +286,14 @@ Answer:`;
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Form Panel */}
           <div ref={formRef}>
-            <form onSubmit={submit} className="border border-border bg-background">
+            <form
+              onSubmit={submit}
+              className="border border-border bg-background"
+            >
               <div className="border-b border-border bg-muted/5 px-6 py-4">
-                <h2 className="text-sm font-medium text-foreground">Legal Query Parameters</h2>
+                <h2 className="text-sm font-medium text-foreground">
+                  Legal Query Parameters
+                </h2>
               </div>
 
               <div className="space-y-5 p-6">
@@ -266,6 +304,7 @@ Answer:`;
                   <select
                     value={situation}
                     onChange={(e) => setSituation(e.target.value)}
+                    title="Select Situation"
                     className="w-full rounded-sm border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
                   >
                     {SITUATIONS.map((s) => (
@@ -281,6 +320,7 @@ Answer:`;
                   <select
                     value={jurisdiction}
                     onChange={(e) => setJurisdiction(e.target.value)}
+                    title="Select Jurisdiction"
                     className="w-full rounded-sm border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
                   >
                     {JURISDICTIONS.map((j) => (
@@ -296,6 +336,7 @@ Answer:`;
                   <select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
+                    title="Select Response Language"
                     className="w-full rounded-sm border border-border bg-background px-3 py-2 text-sm outline-none focus:border-primary/50"
                   >
                     {LANGUAGES.map((l) => (
@@ -353,16 +394,23 @@ Answer:`;
           <div ref={conversationRef}>
             <div className="flex h-[600px] flex-col border border-border bg-background">
               <div className="border-b border-border bg-muted/5 px-6 py-4">
-                <h2 className="text-sm font-medium text-foreground">Conversation</h2>
+                <h2 className="text-sm font-medium text-foreground">
+                  Conversation
+                </h2>
               </div>
 
-              <div ref={chatContainerRef} className="flex-1 space-y-4 overflow-y-auto p-6">
+              <div
+                ref={chatContainerRef}
+                className="flex-1 space-y-4 overflow-y-auto p-6"
+              >
                 {history.length === 0 ? (
                   <div className="flex h-full flex-col items-center justify-center text-center">
                     <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-border bg-muted/10">
                       <MessageSquare className="h-8 w-8 text-muted-foreground/40" />
                     </div>
-                    <p className="text-sm text-muted-foreground">Ask your first question →</p>
+                    <p className="text-sm text-muted-foreground">
+                      Ask your first question →
+                    </p>
                     <p className="mt-1 text-xs text-muted-foreground/60">
                       Your conversation will appear here
                     </p>
@@ -380,10 +428,13 @@ Answer:`;
                             : "max-w-[85%] border-l-2 border-primary bg-muted/5 px-4 py-2.5 text-sm text-foreground"
                         }
                       >
-                        <p className="whitespace-pre-wrap leading-relaxed">{m.text}</p>
+                        <p className="whitespace-pre-wrap leading-relaxed">
+                          {m.text}
+                        </p>
                         {m.role === "ai" && (
                           <div className="mt-2 flex gap-3 border-t border-border/50 pt-2 text-xs text-muted-foreground">
-                            <span>Tokens: ~{m.tokens}</span> <span>·</span> <span>{m.time}</span>
+                            <span>Tokens: ~{m.tokens}</span> <span>·</span>{" "}
+                            <span>{m.time}</span>
                           </div>
                         )}
                       </div>
@@ -417,8 +468,8 @@ Answer:`;
                 <div className="flex items-start gap-2">
                   <Shield className="mt-0.5 h-3 w-3 shrink-0 text-destructive" />
                   <p className="text-xs leading-relaxed text-destructive">
-                    AI guidance only, not legal advice. Consult a qualified lawyer for binding legal
-                    decisions.
+                    AI guidance only, not legal advice. Consult a qualified
+                    lawyer for binding legal decisions.
                   </p>
                 </div>
               </div>
@@ -433,8 +484,12 @@ Answer:`;
                 <Shield className="h-4 w-4 text-primary/60" />
               </div>
             </div>
-            <p className="text-xs font-medium text-foreground">Private & Secure</p>
-            <p className="text-xs text-muted-foreground">Your data never leaves your device</p>
+            <p className="text-xs font-medium text-foreground">
+              Private & Secure
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Your data never leaves your device
+            </p>
           </div>
           <div className="text-center">
             <div className="mb-2 flex justify-center">
@@ -442,8 +497,12 @@ Answer:`;
                 <Gavel className="h-4 w-4 text-primary/60" />
               </div>
             </div>
-            <p className="text-xs font-medium text-foreground">Multi-Jurisdiction</p>
-            <p className="text-xs text-muted-foreground">Covers 5 South Asian legal systems</p>
+            <p className="text-xs font-medium text-foreground">
+              Multi-Jurisdiction
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Covers 5 South Asian legal systems
+            </p>
           </div>
           <div className="text-center">
             <div className="mb-2 flex justify-center">
@@ -452,7 +511,9 @@ Answer:`;
               </div>
             </div>
             <p className="text-xs font-medium text-foreground">4+ Languages</p>
-            <p className="text-xs text-muted-foreground">English, Hindi, Bengali, Nepali</p>
+            <p className="text-xs text-muted-foreground">
+              English, Hindi, Bengali, Nepali
+            </p>
           </div>
         </div>
       </div>

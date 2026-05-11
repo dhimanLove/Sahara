@@ -192,7 +192,7 @@ export function Navbar() {
         >
           <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-border/60 bg-muted/30">
             <img
-              src="asset\sahra_logo.png"
+              src="/sahra_logo.png"
               alt="Sahara logo"
               className="h-6 w-6 object-contain"
             />

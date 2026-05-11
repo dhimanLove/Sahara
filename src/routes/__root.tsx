@@ -1,8 +1,16 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts, useLocation } from "@tanstack/react-router";
+import {
+  Outlet,
+  Link,
+  createRootRoute,
+  HeadContent,
+  Scripts,
+  useLocation,
+} from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
+import faviconUrl from "/asset/favicon.ico?url";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SOSButton } from "@/components/SOSButton";
@@ -44,11 +52,19 @@ function NotFoundComponent() {
 
 export const Route = createRootRoute({
   head: () => ({
+    title: "Sahara",
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" },
+      {
+        name: "viewport",
+        content:
+          "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes",
+      },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: faviconUrl },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -71,7 +87,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const location = useLocation();
-  const isAuthPage = location.pathname.startsWith('/login') || location.pathname.startsWith('/register');
+  const isAuthPage =
+    location.pathname.startsWith("/login") ||
+    location.pathname.startsWith("/register");
 
   if (isAuthPage) {
     return (

@@ -79,7 +79,7 @@ function PhoneMockup() {
   return (
     <div className="mx-auto w-[240px] lg:w-[280px]">
       <img
-        src="asset\sahara.png"
+        src="/sahara.png"
         alt="Sahara phone mockup"
         loading="lazy"
         className="block h-auto w-full rounded-[48px] object-cover"
@@ -88,7 +88,6 @@ function PhoneMockup() {
   );
 }
 
-/* ── Stat ────────────────────────────────────────────────── */
 function Stat({
   target,
   suffix,

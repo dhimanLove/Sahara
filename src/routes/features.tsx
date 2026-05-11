@@ -2,7 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FileText, MessageCircle, Send, Mic, FileCheck, Shield, Zap, Globe } from "lucide-react";
+import {
+  FileText,
+  MessageCircle,
+  Send,
+  Mic,
+  FileCheck,
+  Shield,
+  Zap,
+  Globe,
+} from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,7 +25,10 @@ export const Route = createFileRoute("/features")({
         content: "Document vault, AI rights assistant, legal letter generator.",
       },
       { property: "og:title", content: "Features - Sahara" },
-      { property: "og:description", content: "Powerful protection. Simple to use." },
+      {
+        property: "og:description",
+        content: "Powerful protection. Simple to use.",
+      },
     ],
   }),
   component: Features,
@@ -34,8 +46,12 @@ function VaultMock() {
     <div className="border border-border bg-background">
       <div className="border-b border-border bg-muted/5 px-5 py-3">
         <div className="flex items-center justify-between">
-          <h4 className="text-sm font-medium text-foreground">Document Vault</h4>
-          <span className="text-xs text-muted-foreground">{docs.length} documents</span>
+          <h4 className="text-sm font-medium text-foreground">
+            Document Vault
+          </h4>
+          <span className="text-xs text-muted-foreground">
+            {docs.length} documents
+          </span>
         </div>
       </div>
       <div className="divide-y divide-border">
@@ -48,7 +64,9 @@ function VaultMock() {
               <FileCheck className="h-4 w-4 text-primary" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium text-foreground">{d.name}</p>
+              <p className="truncate text-sm font-medium text-foreground">
+                {d.name}
+              </p>
               <p className="text-xs text-muted-foreground">{d.date}</p>
             </div>
             <span className="text-xs text-primary">✓ Verified</span>
@@ -65,7 +83,9 @@ function ChatMock() {
       <div className="border-b border-border bg-muted/5 px-5 py-3">
         <div className="flex items-center gap-2">
           <MessageCircle className="h-4 w-4 text-primary" />
-          <span className="text-sm font-medium text-foreground">Legal Advisor</span>
+          <span className="text-sm font-medium text-foreground">
+            Legal Advisor
+          </span>
         </div>
       </div>
       <div className="space-y-3 p-5">
@@ -76,7 +96,8 @@ function ChatMock() {
         </div>
         <div className="flex justify-start">
           <div className="max-w-[85%] border-l-2 border-primary bg-muted/5 px-3 py-2 text-sm text-foreground">
-            आपका घर आपका है। हिंदू उत्तराधिकार अधिनियम धारा 14 के तहत आप पूर्ण मालिक हैं।
+            आपका घर आपका है। हिंदू उत्तराधिकार अधिनियम धारा 14 के तहत आप पूर्ण
+            मालिक हैं।
           </div>
         </div>
       </div>
@@ -87,7 +108,10 @@ function ChatMock() {
             placeholder="Ask anything..."
             disabled
           />
-          <button className="flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-muted/20 transition-colors hover:bg-muted/30">
+          <button
+            title="Voice input"
+            className="flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-muted/20 transition-colors hover:bg-muted/30"
+          >
             <Mic className="h-4 w-4 text-foreground" />
           </button>
         </div>
@@ -100,7 +124,9 @@ function LetterMock() {
   return (
     <div className="border border-border bg-background">
       <div className="border-b border-border bg-muted/5 px-5 py-3">
-        <h4 className="text-sm font-medium text-foreground">Legal Letter Generator</h4>
+        <h4 className="text-sm font-medium text-foreground">
+          Legal Letter Generator
+        </h4>
       </div>
       <div className="p-5">
         <div className="space-y-2 rounded-sm border border-border bg-muted/10 p-4">
@@ -112,8 +138,8 @@ function LetterMock() {
           </p>
           <div className="h-px bg-border my-2" />
           <p className="text-sm leading-relaxed text-foreground/75">
-            Respected Sir, I am writing to formally report the attempted forgery of my late
-            husband's land records by relatives...
+            Respected Sir, I am writing to formally report the attempted forgery
+            of my late husband's land records by relatives...
           </p>
         </div>
         <div className="mt-4 flex gap-2">
@@ -142,7 +168,11 @@ function CoreValues() {
       title: "Instant Access",
       desc: "Legal protection available 24/7, no waiting periods",
     },
-    { icon: Globe, title: "Multi-Language", desc: "Support for 12+ Indian languages & dialects" },
+    {
+      icon: Globe,
+      title: "Multi-Language",
+      desc: "Support for 12+ Indian languages & dialects",
+    },
   ];
 
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -163,11 +193,16 @@ function CoreValues() {
   return (
     <div ref={sectionRef} className="grid gap-6 sm:grid-cols-3">
       {values.map((value, idx) => (
-        <div key={idx} className="border border-border bg-background p-6 text-center">
+        <div
+          key={idx}
+          className="border border-border bg-background p-6 text-center"
+        >
           <div className="mb-3 flex justify-center">
             <value.icon className="h-8 w-8 text-primary/60" />
           </div>
-          <h3 className="mb-2 text-base font-medium text-foreground">{value.title}</h3>
+          <h3 className="mb-2 text-base font-medium text-foreground">
+            {value.title}
+          </h3>
           <p className="text-sm text-muted-foreground">{value.desc}</p>
         </div>
       ))}
@@ -222,11 +257,16 @@ function FeatureBlock({
           <h2 className="text-2xl font-light tracking-tight text-foreground sm:text-3xl">
             {title}
           </h2>
-          {subtitle && <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>}
+          {subtitle && (
+            <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
+          )}
         </div>
         <ul className="space-y-3 pt-2">
           {bullets.map((b, idx) => (
-            <li key={idx} className="flex items-start gap-3 text-sm text-foreground/75">
+            <li
+              key={idx}
+              className="flex items-start gap-3 text-sm text-foreground/75"
+            >
               <span className="mt-1.5 h-1 w-1 rounded-full bg-primary/60" />
               <span>{b}</span>
             </li>
@@ -352,7 +392,10 @@ function Features() {
           <h2 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
             Technology Stack
           </h2>
-          <div ref={techRef} className="mt-6 flex flex-wrap justify-center gap-2">
+          <div
+            ref={techRef}
+            className="mt-6 flex flex-wrap justify-center gap-2"
+          >
             {techStack.map((tech) => (
               <span
                 key={tech.name}
