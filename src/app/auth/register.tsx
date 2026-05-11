@@ -234,7 +234,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
-        {/* ═══ LEFT — form ═══ */}
+        {/* ═══ LEFT - form ═══ */}
         <motion.div
           initial={{ opacity: 0, x: -18 }}
           animate={{ opacity: 1, x: 0 }}
@@ -1066,7 +1066,7 @@ export default function RegisterPage() {
           </div>
         </motion.div>
 
-        {/* ═══ RIGHT — image (hero on mobile, split on desktop) ═══ */}
+        {/* ═══ RIGHT - image (hero on mobile, split on desktop) ═══ */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

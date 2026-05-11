@@ -161,10 +161,10 @@ Sahara aligns with:
 
 <br/>
 
-- SDG 1 — No Poverty
-- SDG 5 — Gender Equality
-- SDG 10 — Reduced Inequalities
-- SDG 16 — Peace, Justice & Strong Institutions
+- SDG 1 - No Poverty
+- SDG 5 - Gender Equality
+- SDG 10 - Reduced Inequalities
+- SDG 16 - Peace, Justice & Strong Institutions
 
 ---
 

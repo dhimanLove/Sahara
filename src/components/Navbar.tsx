@@ -241,7 +241,7 @@ export function Navbar() {
             </AnimatePresence>
           </button>
 
-          {/* Auth Dropdown — Commented out */}
+          {/* Auth Dropdown - Commented out */}
           {/* 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

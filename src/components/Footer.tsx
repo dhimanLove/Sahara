@@ -13,7 +13,9 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-[2rem] grid-cols-1 md:grid-cols-3 text-center md:text-left">
         <div className="flex flex-col items-center md:items-start">
           <div className="flex items-center gap-2 font-semibold">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-accent text-accent-foreground">S</span>
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-accent text-accent-foreground">
+              S
+            </span>
             <span className="text-lg">Sahara</span>
           </div>
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">
@@ -29,16 +31,19 @@ export function Footer() {
               ["/demo", "AI Demo"],
               ["/how-it-works", "How It Works"],
               ["/impact", "Impact"],
-              
             ].map(([to, l]) => (
               <li key={to}>
-                <Link to={to} className="hover:text-accent">{l}</Link>
+                <Link to={to} className="hover:text-accent">
+                  {l}
+                </Link>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-semibold">Sustainable Development Goals</h4>
+          <h4 className="text-sm font-semibold">
+            Sustainable Development Goals
+          </h4>
           <div className="mt-3 grid grid-cols-4 gap-2">
             {sdgs.map((s) => (
               <div
@@ -54,7 +59,8 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border px-4 py-5 text-center text-xs text-muted-foreground sm:px-6">
-        Built with Gemini AI · Firebase · Flutter · Google Maps · Developed for Widows · © 2026 Sahara
+        Built with Gemini AI · Firebase · Flutter · Google Maps · Developed for
+        Widows · © 2026 Sahara
       </div>
     </footer>
   );

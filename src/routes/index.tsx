@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
@@ -302,49 +303,65 @@ function Index() {
       </section>
 
       {/* ── FEATURES ─────────────────────────────────────────── */}
-      <section className="border-b border-border/50">
-        <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8">
-          <Reveal className="mb-12 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="mb-1.5 text-[10.5px] font-semibold uppercase tracking-[0.15em] text-accent">
-                Platform
-              </p>
-              <h2 className="text-[clamp(1.5rem,2.8vw,2.2rem)] font-semibold tracking-[-0.025em]">
-                Built for those the law forgot.
-              </h2>
-            </div>
-            <p className="max-w-[260px] text-[13.5px] leading-relaxed text-muted-foreground sm:text-right">
-              Three tools. One app. Complete protection.
-            </p>
-          </Reveal>
+      <section className="relative overflow-hidden border-b border-border/30">
+  {/* Ambient blue whisper */}
+  <div className="pointer-events-none absolute inset-0">
+    <div className="absolute -top-32 left-1/4 h-[400px] w-[400px] rounded-full bg-[#2563EB]/[0.02] blur-3xl" />
+  </div>
 
-          <div className="grid gap-[clamp(16px,2vw,24px)] overflow-hidden rounded-xl border border-border/50 bg-border/40 grid-cols-1 sm:grid-cols-3">
-            {FEATURES.map((f, i) => (
-              <Reveal
-                key={f.title}
-                delay={i * 0.07}
-                className="group relative flex flex-col gap-5 bg-card px-7 py-8 transition-colors duration-200 hover:bg-muted/30 min-w-[280px] flex-[1_1_300px]"
-              >
-                <span className="absolute right-5 top-5 text-[10.5px] font-medium tracking-widest text-foreground/15">
-                  {f.num}
-                </span>
-                <div className="grid h-9 w-9 place-items-center rounded-lg border border-border/50 bg-muted/40 text-foreground/50 transition-colors group-hover:border-accent/30 group-hover:bg-accent/10 group-hover:text-accent">
-                  <f.icon className="h-[18px] w-[18px]" />
-                </div>
-                <div>
-                  <h3 className="text-[14.5px] font-semibold tracking-[-0.015em]">
-                    {f.title}
-                  </h3>
-                  <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
-                    {f.desc}
-                  </p>
-                </div>
-                <ArrowUpRight className="mt-auto h-3.5 w-3.5 text-foreground/15 transition-colors group-hover:text-accent" />
-              </Reveal>
-            ))}
-          </div>
+  <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+    {/* Header */}
+    <Reveal>
+      <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+        <div className="space-y-3">
+          <span className="inline-block text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#2563EB]/60">
+            Platform
+          </span>
+          <h2 className="max-w-lg text-balance text-[clamp(1.8rem,3.5vw,2.6rem)] font-bold leading-[1.12] tracking-[-0.035em] text-foreground">
+            Built for those the law forgot.
+          </h2>
         </div>
-      </section>
+        <p className="max-w-[240px] text-[13.5px] leading-relaxed text-muted-foreground sm:text-right sm:pb-1">
+          Three tools. One app. Complete protection.
+        </p>
+      </div>
+    </Reveal>
+
+    {/* Cards */}
+    <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border/30 bg-border/20 sm:grid-cols-3">
+      {FEATURES.map((f, i) => (
+        <Reveal key={f.title} delay={i * 0.06}>
+          <div className="group relative flex h-full flex-col bg-card px-8 py-10 transition-all duration-300 hover:bg-[#2563EB]/[0.02] sm:px-10">
+            {/* Number */}
+            <span className="absolute right-6 top-6 text-[11px] font-medium tracking-[0.2em] text-foreground/10 transition-colors group-hover:text-[#2563EB]/20">
+              {f.num}
+            </span>
+
+            {/* Icon */}
+            <div className="mb-6 grid h-10 w-10 place-items-center rounded-xl border border-border/40 bg-muted/30 text-foreground/40 transition-all duration-300 group-hover:border-[#2563EB]/25 group-hover:bg-[#2563EB]/[0.06] group-hover:text-[#2563EB]">
+              <f.icon className="h-[18px] w-[18px]" />
+            </div>
+
+            {/* Title + Desc */}
+            <div className="flex-1">
+              <h3 className="text-[15px] font-semibold tracking-[-0.015em] text-foreground">
+                {f.title}
+              </h3>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-muted-foreground">
+                {f.desc}
+              </p>
+            </div>
+
+            {/* Arrow */}
+            <div className="mt-8 flex h-8 w-8 items-center justify-center rounded-lg border border-border/30 bg-muted/20 text-foreground/15 opacity-0 transition-all duration-300 group-hover:border-[#2563EB]/20 group-hover:bg-[#2563EB]/[0.06] group-hover:text-[#2563EB] group-hover:opacity-100">
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </div>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* ── HOW IT WORKS ─────────────────────────────────────── */}
       <section className="border-b border-border/50 bg-muted/20">
@@ -380,76 +397,138 @@ function Index() {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ─────────────────────────────────────── */}
-      <section className="overflow-hidden border-b border-border/50">
-        <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8">
-          <Reveal className="mb-10">
-            <p className="mb-1.5 text-[10.5px] font-semibold uppercase tracking-[0.15em] text-accent">
-              Impact
-            </p>
-            <h2 className="text-[clamp(1.5rem,2.8vw,2.2rem)] font-semibold tracking-[-0.025em]">
-              Voices of change
-            </h2>
-          </Reveal>
-        </div>
-        <div className="relative -mt-4 mb-20">
-          <div className="marquee-track flex w-max gap-4 px-6 sm:px-8">
-            {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
-              <div
-                key={i}
-                className="w-[280px] shrink-0 rounded-xl border border-border/50 bg-card p-5 shadow-sm"
-              >
-                <p className="text-[13.5px] leading-relaxed text-foreground/75">
-                  "{t.q}"
-                </p>
-                <div className="mt-4 flex items-center gap-2">
-                  <div className="grid h-6 w-6 place-items-center rounded-full bg-accent/15 text-[10px] font-semibold text-accent">
-                    {t.who[0]}
-                  </div>
-                  <p className="text-[12px] font-medium text-muted-foreground">
-                    {t.who}, {t.loc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+<section className="relative overflow-hidden border-b border-border/30">
+  {/* Ambient depth */}
+  <div className="pointer-events-none absolute inset-0">
+    <div className="absolute -bottom-40 right-1/4 h-[500px] w-[500px] rounded-full bg-[#2563EB]/[0.015] blur-3xl" />
+    <div className="absolute top-0 left-0 h-[300px] w-[300px] rounded-full bg-[#2563EB]/[0.01] blur-3xl" />
+  </div>
 
-      {/* ── CTA ──────────────────────────────────────────────── */}
-      <section className="bg-background">
-        <div className="mx-auto max-w-7xl px-6 py-24 sm:px-8">
-          <Reveal>
-            <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-card px-10 py-16 text-center sm:px-20">
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-accent" />
-              <p className="mb-2 text-[10.5px] font-semibold uppercase tracking-[0.15em] text-accent">
-                Get Started
-              </p>
-              <h2 className="text-[clamp(1.6rem,3.5vw,2.8rem)] font-semibold tracking-[-0.03em]">
-                Protect what is yours.
-              </h2>
-              <p className="mx-auto mt-4 max-w-sm text-[14.5px] leading-relaxed text-muted-foreground">
-                Free. In your language. On any phone - even without internet.
-              </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Link
-                  to="/demo"
-                  className="group inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-2.5 text-[13px] font-semibold text-accent-foreground transition-all hover:brightness-110"
-                >
-                  Get Protected - It's Free
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                </Link>
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-2 rounded-lg border border-border/60 bg-muted/30 px-6 py-2.5 text-[13px] font-medium text-foreground/70 transition-colors hover:bg-muted hover:text-foreground"
-                >
-                  Learn More
-                </Link>
+  <div className="relative mx-auto max-w-7xl px-4 py-28 sm:px-6 sm:py-36 lg:px-8">
+    {/* Header */}
+    <Reveal>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <span className="inline-block text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#2563EB]/60">
+            Impact
+          </span>
+          <h2 className="mt-2 text-[clamp(2rem,4vw,2.8rem)] font-bold leading-[1.08] tracking-[-0.04em] text-foreground">
+            Voices of change
+          </h2>
+        </div>
+        <p className="max-w-[220px] text-[13.5px] leading-relaxed text-muted-foreground/60 sm:text-right sm:pb-1">
+          Real stories. Real protection. Real lives changed.
+        </p>
+      </div>
+    </Reveal>
+  </div>
+
+  {/* Marquee */}
+  <div className="relative mb-28">
+    {/* Fade edges — wider for bigger cards */}
+    <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />
+    <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-r from-transparent to-background" />
+
+    <div className="marquee-track flex w-max gap-5 px-6 sm:px-10">
+      {[...TESTIMONIALS, ...TESTIMONIALS].map((t, i) => (
+        <div
+          key={i}
+          className="group relative w-[340px] shrink-0 rounded-2xl border border-border/20 bg-card p-8 transition-all duration-500 hover:border-[#2563EB]/20 hover:bg-card/80 sm:w-[380px]"
+        >
+          {/* Subtle inner highlight on hover */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-[#2563EB]/[0.02] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+          <div className="relative">
+            {/* Quote mark */}
+            <span className="mb-5 block text-4xl font-serif leading-none text-[#2563EB]/15">
+              "
+            </span>
+
+            {/* Quote text */}
+            <p className="text-[15px] leading-relaxed text-foreground/80 transition-colors group-hover:text-foreground/90">
+              {t.q}
+            </p>
+
+            {/* Separator */}
+            <div className="mt-6 h-px w-10 bg-border/40 transition-all duration-500 group-hover:w-16 group-hover:bg-[#2563EB]/25" />
+
+            {/* Author */}
+            <div className="mt-5 flex items-center gap-3.5">
+              <div className="grid h-9 w-9 place-items-center rounded-full bg-[#2563EB]/[0.05] text-[12px] font-semibold text-[#2563EB] transition-all duration-300 group-hover:bg-[#2563EB]/[0.1] group-hover:scale-105">
+                {t.who[0]}
+              </div>
+              <div>
+                <p className="text-[13px] font-medium text-foreground">
+                  {t.who}
+                </p>
+                <p className="text-[12px] text-muted-foreground/50">
+                  {t.loc}
+                </p>
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+     <section className="relative overflow-hidden bg-background py-28 sm:py-36">
+  {/* Ambient depth layers */}
+  <div className="pointer-events-none absolute inset-0">
+    <div className="absolute -top-64 right-0 h-[600px] w-[600px] translate-x-1/3 rounded-full bg-[#2563EB]/[0.03] blur-3xl" />
+    <div className="absolute -bottom-48 left-0 h-[500px] w-[500px] -translate-x-1/3 rounded-full bg-[#3B82F6]/[0.02] blur-3xl" />
+  </div>
+
+  <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <Reveal>
+      <div className="flex flex-col items-start justify-between gap-12 lg:flex-row lg:gap-20">
+        {/* Left: Label + Headline + Subhead */}
+        <div className="flex-1">
+          <span className="inline-block text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[#2563EB]/60">
+            Get Started
+          </span>
+
+          <h2 className="mt-5 max-w-lg text-balance text-[clamp(2.2rem,5vw,3.8rem)] font-bold leading-[1.06] tracking-[-0.04em] text-foreground">
+            Protect what is
+            <br />
+            <span className="italic text-[#2563EB]">yours.</span>
+          </h2>
+
+          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground">
+            Free. In your language. On any phone - even without internet.
+          </p>
+        </div>
+
+        {/* Right: CTAs + Trust line */}
+        <div className="flex flex-1 flex-col items-start justify-end lg:items-end lg:pt-16">
+          <div className="flex flex-col gap-3.5 sm:flex-row">
+            <Link
+              to="/demo"
+              className="group relative isolate inline-flex items-center gap-2.5 overflow-hidden rounded-xl bg-[#2563EB] px-8 py-3.5 text-[13.5px] font-semibold text-white shadow-sm transition-all hover:bg-[#1D4ED8] active:scale-[0.98]"
+            >
+              <span className="relative z-10 flex items-center gap-2.5">
+                Get Protected - It's Free
+                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </Link>
+
+            <Link
+              to="/about"
+              className="inline-flex items-center gap-2.5 rounded-xl border border-[#2563EB]/15 px-8 py-3.5 text-[13.5px] font-medium text-[#2563EB] transition-all hover:border-[#2563EB]/30 hover:bg-[#2563EB]/[0.04]"
+            >
+              Learn More
+            </Link>
+          </div>
+
+          <p className="mt-10 text-[11.5px] tracking-wide text-muted-foreground/50">
+            Trusted by rural widows across South Asia
+          </p>
+        </div>
+      </div>
+    </Reveal>
+  </div>
+</section>
     </div>
   );
 }
