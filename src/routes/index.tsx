@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { PageMeta } from "@/components/PageMeta";
 import { useCounter } from "@/hooks/useCounter";
+import saharaPng from "../../asset/sahara.png?url";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -79,7 +80,7 @@ function PhoneMockup() {
   return (
     <div className="mx-auto w-[240px] lg:w-[280px]">
       <img
-        src="/sahara.png"
+        src={saharaPng}
         alt="Sahara phone mockup"
         loading="lazy"
         className="block h-auto w-full rounded-[48px] object-cover"

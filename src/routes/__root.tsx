@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
-import faviconUrl from "/asset/favicon.ico?url";
+import faviconUrl from "../../asset/favicon.ico?url";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SOSButton } from "@/components/SOSButton";

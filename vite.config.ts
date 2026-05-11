@@ -6,7 +6,6 @@ import tailwindcss from "@tailwindcss/vite";
 import viteTsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  publicDir: "asset",
   plugins: [
     tanstackStart(),
     nitro(),

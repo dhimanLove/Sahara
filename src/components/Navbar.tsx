@@ -26,6 +26,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
+import sahraLogoUrl from "../../asset/sahra_logo.png?url";
 
 const links = [
   { to: "/", label: "Home" },
@@ -192,7 +193,7 @@ export function Navbar() {
         >
           <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-border/60 bg-muted/30">
             <img
-              src="/sahra_logo.png"
+              src={sahraLogoUrl}
               alt="Sahara logo"
               className="h-6 w-6 object-contain"
             />
