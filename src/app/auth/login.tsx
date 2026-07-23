@@ -29,22 +29,37 @@ import {
 } from "lucide-react";
 
 const countries = [
-  { code: "+1",   name: "United States",  flag: "🇺🇸", placeholder: "555 123 4567" },
-  { code: "+44",  name: "United Kingdom",  flag: "🇬🇧", placeholder: "7412 345678" },
-  { code: "+91",  name: "India",           flag: "🇮🇳", placeholder: "98765 43210" },
-  { code: "+61",  name: "Australia",       flag: "🇦🇺", placeholder: "412 345 678" },
-  { code: "+49",  name: "Germany",         flag: "🇩🇪", placeholder: "151 23456789" },
-  { code: "+33",  name: "France",          flag: "🇫🇷", placeholder: "6 12 34 56 78" },
-  { code: "+81",  name: "Japan",           flag: "🇯🇵", placeholder: "090 1234 5678" },
-  { code: "+86",  name: "China",           flag: "🇨🇳", placeholder: "138 1234 5678" },
-  { code: "+55",  name: "Brazil",          flag: "🇧🇷", placeholder: "11 91234-5678" },
-  { code: "+234", name: "Nigeria",         flag: "🇳🇬", placeholder: "0803 123 4567" },
-  { code: "+254", name: "Kenya",           flag: "🇰🇪", placeholder: "712 345678" },
-  { code: "+27",  name: "South Africa",    flag: "🇿🇦", placeholder: "82 123 4567" },
-  { code: "+971", name: "UAE",             flag: "🇦🇪", placeholder: "50 123 4567" },
-  { code: "+92",  name: "Pakistan",        flag: "🇵🇰", placeholder: "312 3456789" },
-  { code: "+880", name: "Bangladesh",      flag: "🇧🇩", placeholder: "1712 345678" },
-  { code: "+977", name: "Nepal",           flag: "🇳🇵", placeholder: "984 1234567" },
+  {
+    code: "+1",
+    name: "United States",
+    flag: "🇺🇸",
+    placeholder: "555 123 4567",
+  },
+  {
+    code: "+44",
+    name: "United Kingdom",
+    flag: "🇬🇧",
+    placeholder: "7412 345678",
+  },
+  { code: "+91", name: "India", flag: "🇮🇳", placeholder: "98765 43210" },
+  { code: "+61", name: "Australia", flag: "🇦🇺", placeholder: "412 345 678" },
+  { code: "+49", name: "Germany", flag: "🇩🇪", placeholder: "151 23456789" },
+  {
+    code: "+33",
+    name: "New Zealand",
+    flag: "🇳🇿",
+    placeholder: "6 12 34 56 78",
+  },
+  { code: "+81", name: "Japan", flag: "🇯🇵", placeholder: "090 1234 5678" },
+  { code: "+86", name: "China", flag: "🇨🇳", placeholder: "138 1234 5678" },
+  { code: "+55", name: "Brazil", flag: "🇧🇷", placeholder: "11 91234-5678" },
+  { code: "+234", name: "Nigeria", flag: "🇳🇬", placeholder: "0803 123 4567" },
+  { code: "+254", name: "Kenya", flag: "🇰🇪", placeholder: "712 345678" },
+  { code: "+27", name: "South Africa", flag: "🇿🇦", placeholder: "82 123 4567" },
+  { code: "+971", name: "UAE", flag: "🇦🇪", placeholder: "50 123 4567" },
+  { code: "+92", name: "Pakistan", flag: "🇵🇰", placeholder: "312 3456789" },
+  { code: "+880", name: "Bangladesh", flag: "🇧🇩", placeholder: "1712 345678" },
+  { code: "+977", name: "Nepal", flag: "🇳🇵", placeholder: "984 1234567" },
 ];
 
 type LoginMode = "widow" | "ngo";
@@ -80,7 +95,7 @@ export default function LoginPage() {
   const filteredCountries = countries.filter(
     (c) =>
       c.name.toLowerCase().includes(countrySearch.toLowerCase()) ||
-      c.code.includes(countrySearch)
+      c.code.includes(countrySearch),
   );
 
   useEffect(() => {
@@ -92,7 +107,10 @@ export default function LoginPage() {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (countryDropdownRef.current && !countryDropdownRef.current.contains(e.target as Node)) {
+      if (
+        countryDropdownRef.current &&
+        !countryDropdownRef.current.contains(e.target as Node)
+      ) {
         setCountryDropdownOpen(false);
       }
     };
@@ -104,7 +122,9 @@ export default function LoginPage() {
     if (value.length > 1) {
       const pasted = value.replace(/\D/g, "").slice(0, 6);
       const newOtp = [...otp];
-      pasted.split("").forEach((char, i) => { if (i < 6) newOtp[i] = char; });
+      pasted.split("").forEach((char, i) => {
+        if (i < 6) newOtp[i] = char;
+      });
       setOtp(newOtp);
       otpInputRefs.current[Math.min(pasted.length, 5)]?.focus();
       return;
@@ -115,7 +135,10 @@ export default function LoginPage() {
     if (value && index < 5) otpInputRefs.current[index + 1]?.focus();
   };
 
-  const handleOtpKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleOtpKeyDown = (
+    index: number,
+    e: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       otpInputRefs.current[index - 1]?.focus();
     }
@@ -133,7 +156,10 @@ export default function LoginPage() {
 
   const handleWidowLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (otp.join("").length !== 6) { setError("Please enter the complete 6-digit code"); return; }
+    if (otp.join("").length !== 6) {
+      setError("Please enter the complete 6-digit code");
+      return;
+    }
     setError("");
     setIsLoading(true);
     await new Promise((r) => setTimeout(r, 2000));
@@ -143,7 +169,10 @@ export default function LoginPage() {
 
   const handleNGOLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) { setError("Please fill in all fields"); return; }
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
     setError("");
     setIsLoading(true);
     await new Promise((r) => setTimeout(r, 2000));
@@ -177,30 +206,41 @@ export default function LoginPage() {
         <div
           className="absolute inset-0"
           style={{
-            background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(180,130,60,0.07) 0%, transparent 70%), radial-gradient(ellipse 60% 80% at 100% 100%, rgba(100,80,180,0.05) 0%, transparent 70%)",
+            background:
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(180,130,60,0.07) 0%, transparent 70%), radial-gradient(ellipse 60% 80% at 100% 100%, rgba(100,80,180,0.05) 0%, transparent 70%)",
           }}
         />
         {/* Fine grid */}
         <div
           className="absolute inset-0 opacity-[0.025]"
           style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
 
         <div className="relative z-10 flex flex-col h-full justify-between">
           {/* Logo */}
-          <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="flex items-center gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
                 <Heart className="w-5 h-5 text-white fill-white" />
               </div>
               <div>
-                <p className="text-white font-semibold text-xl tracking-[0.15em] uppercase leading-none" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                <p
+                  className="text-white font-semibold text-xl tracking-[0.15em] uppercase leading-none"
+                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+                >
                   Sahara
                 </p>
-                <p className="text-[10px] text-neutral-500 tracking-[0.3em] uppercase mt-0.5">Global Initiative</p>
+                <p className="text-[10px] text-neutral-500 tracking-[0.3em] uppercase mt-0.5">
+                  Global Initiative
+                </p>
               </div>
             </div>
           </motion.div>
@@ -217,13 +257,17 @@ export default function LoginPage() {
               className="text-5xl xl:text-[3.5rem] leading-[1.1] text-white font-light tracking-tight"
               style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
             >
-              Dignity.<br />
-              <em className="text-amber-400 not-italic">Rights.</em><br />
-              Support.<br />
+              Dignity.
+              <br />
+              <em className="text-amber-400 not-italic">Rights.</em>
+              <br />
+              Support.
+              <br />
               <span className="text-neutral-500">Worldwide.</span>
             </h1>
             <p className="mt-8 text-neutral-400 text-[15px] leading-relaxed max-w-xs">
-              A trusted platform connecting widows to care, support, and legal protection across 40+ countries.
+              A trusted platform connecting widows to care, support, and legal
+              protection across 40+ countries.
             </p>
           </motion.div>
 
@@ -245,11 +289,15 @@ export default function LoginPage() {
                   className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-white/[0.05] bg-white/[0.025]"
                 >
                   <item.icon className="w-3.5 h-3.5 text-amber-500/60 flex-shrink-0" />
-                  <span className="text-[11px] text-neutral-500 tracking-wide">{item.label}</span>
+                  <span className="text-[11px] text-neutral-500 tracking-wide">
+                    {item.label}
+                  </span>
                 </div>
               ))}
             </div>
-            <p className="mt-6 text-[11px] text-neutral-700 tracking-[0.15em] uppercase">UN SDG 5 Aligned · GDPR Compliant</p>
+            <p className="mt-6 text-[11px] text-neutral-700 tracking-[0.15em] uppercase">
+              UN SDG 5 Aligned · GDPR Compliant
+            </p>
           </motion.div>
         </div>
       </aside>
@@ -257,17 +305,24 @@ export default function LoginPage() {
       {/* ─── Right Form Panel ─── */}
       <main className="flex-1 flex items-center justify-center p-6 md:p-10 bg-[#0c0c0c] lg:border-l lg:border-white/[0.04]">
         <div className="w-full max-w-[420px]">
-
           {/* Mobile logo */}
           <div className="flex lg:hidden items-center gap-2.5 mb-10 justify-center">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
               <Heart className="w-4 h-4 text-white fill-white" />
             </div>
-            <span className="text-white font-semibold tracking-widest uppercase text-sm" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>Sahara</span>
+            <span
+              className="text-white font-semibold tracking-widest uppercase text-sm"
+              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+            >
+              Sahara
+            </span>
           </div>
 
           {/* Mode Toggle */}
-          <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }}>
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
             <div className="flex p-1 bg-neutral-900 rounded-[18px] border border-white/[0.05] mb-10">
               {(["widow", "ngo"] as LoginMode[]).map((m) => (
                 <button
@@ -287,7 +342,11 @@ export default function LoginPage() {
                       : "text-neutral-600 hover:text-neutral-400"
                   }`}
                 >
-                  {m === "widow" ? <Heart className="w-3.5 h-3.5" /> : <Building2 className="w-3.5 h-3.5" />}
+                  {m === "widow" ? (
+                    <Heart className="w-3.5 h-3.5" />
+                  ) : (
+                    <Building2 className="w-3.5 h-3.5" />
+                  )}
                   {m === "widow" ? "Widow Login" : "NGO Login"}
                 </button>
               ))}
@@ -330,7 +389,11 @@ export default function LoginPage() {
                 <div className="flex items-center gap-3 px-4 py-3 bg-red-500/8 border border-red-500/15 rounded-[14px] text-red-400 text-[13px]">
                   <AlertCircle className="w-4 h-4 flex-shrink-0" />
                   <span className="flex-1">{error}</span>
-                  <button type="button" onClick={() => setError("")} className="hover:text-red-300 transition-colors">
+                  <button
+                    type="button"
+                    onClick={() => setError("")}
+                    className="hover:text-red-300 transition-colors"
+                  >
                     <X className="w-4 h-4" />
                   </button>
                 </div>
@@ -365,15 +428,26 @@ export default function LoginPage() {
                         </label>
                         <div className="flex gap-2.5">
                           {/* Country picker */}
-                          <div className="relative flex-shrink-0" ref={countryDropdownRef}>
+                          <div
+                            className="relative flex-shrink-0"
+                            ref={countryDropdownRef}
+                          >
                             <button
                               type="button"
-                              onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
+                              onClick={() =>
+                                setCountryDropdownOpen(!countryDropdownOpen)
+                              }
                               className="flex items-center gap-2 h-[52px] px-3.5 bg-neutral-900/60 border border-neutral-800 rounded-[14px] text-white hover:border-neutral-700 hover:bg-neutral-900 transition-all duration-200 focus:outline-none focus:border-amber-500/60 focus:ring-[3px] focus:ring-amber-500/10"
                             >
-                              <span className="text-base leading-none">{selectedCountry?.flag}</span>
-                              <span className="text-[13px] font-medium text-neutral-300 tabular-nums">{selectedCountry?.code}</span>
-                              <ChevronDown className={`w-3.5 h-3.5 text-neutral-600 transition-transform duration-200 ${countryDropdownOpen ? "rotate-180" : ""}`} />
+                              <span className="text-base leading-none">
+                                {selectedCountry?.flag}
+                              </span>
+                              <span className="text-[13px] font-medium text-neutral-300 tabular-nums">
+                                {selectedCountry?.code}
+                              </span>
+                              <ChevronDown
+                                className={`w-3.5 h-3.5 text-neutral-600 transition-transform duration-200 ${countryDropdownOpen ? "rotate-180" : ""}`}
+                              />
                             </button>
 
                             <AnimatePresence>
@@ -393,7 +467,9 @@ export default function LoginPage() {
                                         type="text"
                                         placeholder="Search country…"
                                         value={countrySearch}
-                                        onChange={(e) => setCountrySearch(e.target.value)}
+                                        onChange={(e) =>
+                                          setCountrySearch(e.target.value)
+                                        }
                                         className="w-full h-9 pl-9 pr-3 bg-neutral-900 border border-neutral-800 rounded-xl text-[13px] text-white placeholder-neutral-600 focus:outline-none focus:border-neutral-700"
                                       />
                                     </div>
@@ -404,13 +480,25 @@ export default function LoginPage() {
                                       <button
                                         key={country.code}
                                         type="button"
-                                        onClick={() => { setCountryCode(country.code); setCountryDropdownOpen(false); setCountrySearch(""); }}
+                                        onClick={() => {
+                                          setCountryCode(country.code);
+                                          setCountryDropdownOpen(false);
+                                          setCountrySearch("");
+                                        }}
                                         className={`w-full flex items-center gap-3 px-4 py-2.5 text-[13px] hover:bg-white/[0.04] transition-colors text-left ${countryCode === country.code ? "text-amber-400 bg-amber-500/5" : "text-neutral-300"}`}
                                       >
-                                        <span className="text-base">{country.flag}</span>
-                                        <span className="flex-1">{country.name}</span>
-                                        <span className="text-neutral-600 tabular-nums">{country.code}</span>
-                                        {countryCode === country.code && <Check className="w-3.5 h-3.5 text-amber-500" />}
+                                        <span className="text-base">
+                                          {country.flag}
+                                        </span>
+                                        <span className="flex-1">
+                                          {country.name}
+                                        </span>
+                                        <span className="text-neutral-600 tabular-nums">
+                                          {country.code}
+                                        </span>
+                                        {countryCode === country.code && (
+                                          <Check className="w-3.5 h-3.5 text-amber-500" />
+                                        )}
                                       </button>
                                     ))}
                                   </div>
@@ -425,8 +513,16 @@ export default function LoginPage() {
                             <input
                               type="tel"
                               value={phoneNumber}
-                              onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, "").slice(0, 15))}
-                              placeholder={selectedCountry?.placeholder || "Phone number"}
+                              onChange={(e) =>
+                                setPhoneNumber(
+                                  e.target.value
+                                    .replace(/\D/g, "")
+                                    .slice(0, 15),
+                                )
+                              }
+                              placeholder={
+                                selectedCountry?.placeholder || "Phone number"
+                              }
                               className={`${inputBase} ${inputFocus} pl-11 pr-4`}
                             />
                           </div>
@@ -441,9 +537,24 @@ export default function LoginPage() {
                         className="w-full h-[52px] flex items-center justify-center gap-2.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-[#0a0a0a] text-[14px] font-semibold rounded-[14px] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
                       >
                         {isLoading ? (
-                          <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                          <svg
+                            className="animate-spin w-5 h-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                            />
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                            />
                           </svg>
                         ) : (
                           <>
@@ -466,32 +577,46 @@ export default function LoginPage() {
                         <div className="w-14 h-14 mx-auto mb-5 rounded-2xl bg-amber-500/10 border border-amber-500/15 flex items-center justify-center">
                           <Fingerprint className="w-7 h-7 text-amber-500" />
                         </div>
-                        <h3 className="text-white text-[17px] font-medium mb-1.5">Verify your identity</h3>
+                        <h3 className="text-white text-[17px] font-medium mb-1.5">
+                          Verify your identity
+                        </h3>
                         <p className="text-[13px] text-neutral-500 leading-relaxed">
                           6-digit code sent to{" "}
-                          <span className="text-neutral-300 font-medium">{selectedCountry?.code} {phoneNumber}</span>
+                          <span className="text-neutral-300 font-medium">
+                            {selectedCountry?.code} {phoneNumber}
+                          </span>
                         </p>
                       </div>
 
                       {/* Delivery method pills */}
                       <div className="flex justify-center gap-1.5">
-                        {(["sms", "whatsapp", "voice"] as OTPMethod[]).map((m) => (
-                          <button
-                            key={m}
-                            type="button"
-                            onClick={() => handleResendOtp(m)}
-                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] text-[11px] font-medium tracking-wide transition-all border ${
-                              otpMethod === m
-                                ? "bg-amber-500/12 border-amber-500/25 text-amber-400"
-                                : "bg-transparent border-neutral-800 text-neutral-600 hover:text-neutral-400 hover:border-neutral-700"
-                            }`}
-                          >
-                            {m === "sms" && <MessageSquare className="w-3 h-3" />}
-                            {m === "whatsapp" && <span className="text-xs">📱</span>}
-                            {m === "voice" && <Phone className="w-3 h-3" />}
-                            {m === "sms" ? "SMS" : m === "whatsapp" ? "WhatsApp" : "Call"}
-                          </button>
-                        ))}
+                        {(["sms", "whatsapp", "voice"] as OTPMethod[]).map(
+                          (m) => (
+                            <button
+                              key={m}
+                              type="button"
+                              onClick={() => handleResendOtp(m)}
+                              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] text-[11px] font-medium tracking-wide transition-all border ${
+                                otpMethod === m
+                                  ? "bg-amber-500/12 border-amber-500/25 text-amber-400"
+                                  : "bg-transparent border-neutral-800 text-neutral-600 hover:text-neutral-400 hover:border-neutral-700"
+                              }`}
+                            >
+                              {m === "sms" && (
+                                <MessageSquare className="w-3 h-3" />
+                              )}
+                              {m === "whatsapp" && (
+                                <span className="text-xs">📱</span>
+                              )}
+                              {m === "voice" && <Phone className="w-3 h-3" />}
+                              {m === "sms"
+                                ? "SMS"
+                                : m === "whatsapp"
+                                  ? "WhatsApp"
+                                  : "Call"}
+                            </button>
+                          ),
+                        )}
                       </div>
 
                       {/* OTP Boxes */}
@@ -499,12 +624,16 @@ export default function LoginPage() {
                         {otp.map((digit, index) => (
                           <input
                             key={index}
-                            ref={(el) => { otpInputRefs.current[index] = el; }}
+                            ref={(el) => {
+                              otpInputRefs.current[index] = el;
+                            }}
                             type="text"
                             inputMode="numeric"
                             maxLength={6}
                             value={digit}
-                            onChange={(e) => handleOtpChange(index, e.target.value)}
+                            onChange={(e) =>
+                              handleOtpChange(index, e.target.value)
+                            }
                             onKeyDown={(e) => handleOtpKeyDown(index, e)}
                             className={`w-11 h-14 text-center text-[20px] font-semibold bg-neutral-900/60 border rounded-[14px] text-white focus:outline-none transition-all duration-200 caret-amber-500 ${
                               digit
@@ -518,7 +647,12 @@ export default function LoginPage() {
                       {/* Resend timer */}
                       <p className="text-center text-[12px] text-neutral-600">
                         {cooldown > 0 ? (
-                          <>Resend in <span className="text-amber-500 tabular-nums">{cooldown}s</span></>
+                          <>
+                            Resend in{" "}
+                            <span className="text-amber-500 tabular-nums">
+                              {cooldown}s
+                            </span>
+                          </>
                         ) : (
                           <button
                             type="button"
@@ -537,9 +671,24 @@ export default function LoginPage() {
                         className="w-full h-[52px] flex items-center justify-center gap-2.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-[#0a0a0a] text-[14px] font-semibold rounded-[14px] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
                       >
                         {isLoading ? (
-                          <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                          <svg
+                            className="animate-spin w-5 h-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                            />
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                            />
                           </svg>
                         ) : (
                           <>
@@ -552,7 +701,10 @@ export default function LoginPage() {
                       {/* Back */}
                       <button
                         type="button"
-                        onClick={() => { setOtpSent(false); setOtp(["","","","","",""]); }}
+                        onClick={() => {
+                          setOtpSent(false);
+                          setOtp(["", "", "", "", "", ""]);
+                        }}
                         className="w-full text-center text-[12px] text-neutral-600 hover:text-neutral-400 transition-colors mt-1"
                       >
                         ← Change phone number
@@ -594,7 +746,10 @@ export default function LoginPage() {
                     <label className="text-[11px] font-medium text-neutral-500 tracking-[0.12em] uppercase">
                       Password
                     </label>
-                    <a href="/forgot-password" className="text-[11px] text-blue-400/80 hover:text-blue-300 transition-colors">
+                    <a
+                      href="/forgot-password"
+                      className="text-[11px] text-blue-400/80 hover:text-blue-300 transition-colors"
+                    >
                       Forgot password?
                     </a>
                   </div>
@@ -612,7 +767,11 @@ export default function LoginPage() {
                       onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-600 hover:text-neutral-400 transition-colors"
                     >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      {showPassword ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -627,7 +786,9 @@ export default function LoginPage() {
                         : "bg-transparent border-neutral-700 group-hover:border-neutral-500"
                     }`}
                   >
-                    {rememberMe && <Check className="w-3 h-3 text-white" strokeWidth={3} />}
+                    {rememberMe && (
+                      <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                    )}
                   </div>
                   <span className="text-[13px] text-neutral-500 group-hover:text-neutral-400 transition-colors">
                     Remember for 30 days
@@ -641,9 +802,24 @@ export default function LoginPage() {
                   className="w-full h-[52px] flex items-center justify-center gap-2.5 bg-blue-500 hover:bg-blue-400 active:bg-blue-600 text-white text-[14px] font-semibold rounded-[14px] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed mt-2"
                 >
                   {isLoading ? (
-                    <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    <svg
+                      className="animate-spin w-5 h-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                      />
                     </svg>
                   ) : (
                     <>
@@ -666,7 +842,10 @@ export default function LoginPage() {
               { icon: Lock, label: "AES-256" },
               { icon: Landmark, label: "ISO 27001" },
             ].map((b) => (
-              <div key={b.label} className="flex items-center gap-1.5 text-[11px] text-neutral-700">
+              <div
+                key={b.label}
+                className="flex items-center gap-1.5 text-[11px] text-neutral-700"
+              >
                 <b.icon className="w-3.5 h-3.5 text-neutral-700" />
                 <span>{b.label}</span>
               </div>
@@ -676,14 +855,22 @@ export default function LoginPage() {
           {/* Register link */}
           <p className="text-center mt-6 text-[13px] text-neutral-600">
             {isWidow ? (
-              <>New to Sahara?{" "}
-                <a href="/register?type=widow" className="text-amber-500 hover:text-amber-400 transition-colors font-medium">
+              <>
+                New to Sahara?{" "}
+                <a
+                  href="/register?type=widow"
+                  className="text-amber-500 hover:text-amber-400 transition-colors font-medium"
+                >
                   Create an account
                 </a>
               </>
             ) : (
-              <>Register your NGO?{" "}
-                <a href="/register?type=ngo" className="text-blue-400 hover:text-blue-300 transition-colors font-medium">
+              <>
+                Register your NGO?{" "}
+                <a
+                  href="/register?type=ngo"
+                  className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                >
                   Partner with us
                 </a>
               </>
